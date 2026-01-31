@@ -13,13 +13,37 @@ public struct WaveSpawn
     public float delay; // Time delay between the previous spawn (Keyframe) and this one. We dont put absolute time here because we might tweak/add/remove waves and we want everything following to naturally "shift".
 }
 
+public struct SpawnRange
+{
+    public float min, max;
+    public float x;
+
+    public SpawnRange(float _min, float _max, float _x)
+    {
+        min = _min;
+        max = _max;
+        x = _x;
+    }
+}
+
 
 // Manager script that runs the waves and spawn the enemies
 public class WaveManager : MonoBehaviour
 {
     public List<WaveSpawn> pendingWaveSpawns = new List<WaveSpawn>();
+    public GameObject maxSpawnLimit;
+    public GameObject minSpawnLimit;
 
+    private SpawnRange spawnRange;
     private float time;
+
+    private void Start()
+    {
+        if (maxSpawnLimit != null && minSpawnLimit != null)
+        {
+            spawnRange = new SpawnRange(minSpawnLimit.transform.position.y, maxSpawnLimit.transform.position.y, minSpawnLimit.transform.position.x);
+        }
+    }
 
     private void Update()
     {
@@ -33,7 +57,8 @@ public class WaveManager : MonoBehaviour
                 pendingWaveSpawns.RemoveAt(0);
 
                 // Once a wave is activated, its just a GameObject that exists until it has spewed everyone.
-                GameObject.Instantiate(nextWaveSpawn.wave, Vector3.zero, Quaternion.identity);
+                Wave wave = GameObject.Instantiate(nextWaveSpawn.wave, Vector3.zero, Quaternion.identity);
+                wave.spawnRange = spawnRange;
             }
             else
             {
