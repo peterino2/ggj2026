@@ -104,3 +104,6 @@ InitTestScene*.unity*
 
 **/tmp/
 **/tmp.meta
+
+
+.vsconfig

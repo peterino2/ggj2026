@@ -35,6 +35,7 @@ public class PowerNode : MonoBehaviour
     private bool wasDocked;
     private MaterialPropertyBlock propertyBlock;
     private static readonly int ClipRectID = Shader.PropertyToID("_ClipRect");
+    private Vector2 dragOffset;
 
     private void Awake()
     {
@@ -95,7 +96,8 @@ public class PowerNode : MonoBehaviour
 
         if (currentState == NodeState.Dragging)
         {
-            targetWorldPosition = ScreenToWorldOnNodePlane(screenPos);
+            targetWorldPosition = ScreenToWorldOnNodePlane(screenPos - dragOffset);
+            selectionSprite.enabled = true;
             ApplySpringPhysics();
             
             selectionSprite.enabled = true;
@@ -226,6 +228,12 @@ public class PowerNode : MonoBehaviour
         currentState = NodeState.Dragging;
         velocity = Vector3.zero;
         transform.SetAsLastSibling();
+
+        // We keep an offset of where we "mouse down" into the rect. This will make dragging stuff feel more natural.
+        Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
+        Vector2 uiScreenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, rectTransform.position);
+
+        dragOffset = mouseScreenPos - uiScreenPos;
     }
 
     private void HandleDragRelease(Vector2 screenPos)
