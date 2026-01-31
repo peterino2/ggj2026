@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TestWave
   m_EditorClassIdentifier: Assembly-CSharp::SpreadWave
   duration: 10
-  enemy: {fileID: 0}
+  enemy: {fileID: 7058049110130108560, guid: da2c7611cce3f1845b5b47f55669dff3, type: 3}
   frequency: 1
