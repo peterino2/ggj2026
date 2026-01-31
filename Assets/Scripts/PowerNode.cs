@@ -97,13 +97,11 @@ public class PowerNode : MonoBehaviour
         if (currentState == NodeState.Dragging)
         {
             targetWorldPosition = ScreenToWorldOnNodePlane(screenPos - dragOffset);
-            selectionSprite.enabled = true;
             ApplySpringPhysics();
-            
             selectionSprite.enabled = true;
             dockedSprite.enabled = false;
         }
-        else if(currentState == NodeState.Floating)
+        else if (currentState == NodeState.Floating)
         {
             selectionSprite.enabled = false;
             dockedSprite.enabled = false;
@@ -232,7 +230,6 @@ public class PowerNode : MonoBehaviour
         // We keep an offset of where we "mouse down" into the rect. This will make dragging stuff feel more natural.
         Vector2 mouseScreenPos = Mouse.current.position.ReadValue();
         Vector2 uiScreenPos = RectTransformUtility.WorldToScreenPoint(mainCamera, rectTransform.position);
-
         dragOffset = mouseScreenPos - uiScreenPos;
     }
 
@@ -240,6 +237,7 @@ public class PowerNode : MonoBehaviour
     {
         Deckbuilder db = Deckbuilder.GetInstance();
         db.StopDragging(this);
+        dragOffset = Vector2.zero;
         
         Vector3 thisScreenPos = mainCamera.WorldToScreenPoint(transform.position);
         
