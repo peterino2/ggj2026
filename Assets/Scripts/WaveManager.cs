@@ -19,7 +19,6 @@ public class WaveManager : MonoBehaviour
 {
     public List<WaveSpawn> pendingWaveSpawns = new List<WaveSpawn>();
 
-    private List<Wave> activeWaves = new List<Wave>();
     private float time;
 
     private void Update()
@@ -32,19 +31,13 @@ public class WaveManager : MonoBehaviour
             if (nextWaveSpawn.delay <= 0)
             {
                 pendingWaveSpawns.RemoveAt(0);
-                activeWaves.Add(nextWaveSpawn.wave);
-            }
-        }
 
-        // Update active waves
-        for (int i = 0; i < activeWaves.Count; ++i)
-        {
-            Wave wave = activeWaves[i];
-            wave.duration -= Time.deltaTime;
-            if (wave.Update() || wave.duration < 0)
+                // Once a wave is activated, its just a GameObject that exists until it has spewed everyone.
+                GameObject.Instantiate(nextWaveSpawn.wave, Vector3.zero, Quaternion.identity);
+            }
+            else
             {
-                activeWaves.RemoveAt(i);
-                --i;
+                pendingWaveSpawns[0] = nextWaveSpawn; // Ya I'm C# rusty... Structs are all by copies
             }
         }
     }
