@@ -46,41 +46,6 @@ public class Deckbuilder : MonoBehaviour
     }
 
     public bool MouseDown = false;
-
-    #if FALSE
-    void HandleMouseDown(Vector2 mouse2d)
-    {
-        if (!MouseDown)
-        {
-            return;
-        }
-
-        Vector2 offset = mouse2d - _mouseDownPosition;
-        _graphOffsetPosition = offset + _graphOffsetPositionBase;
-        
-        if (Input.GetMouseButtonUp(0))
-        {
-            _graphOffsetPositionBase = offset;
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Vector2 mouse2d = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
-        
-        if (Input.GetMouseButtonDown(0))
-        {
-            MouseDown = true;
-            _mouseDownPosition = mouse2d;
-        }
-
-        _graphOffsetPosition = _graphOffsetPositionBase;
-        HandleMouseDown(mouse2d);
-        
-        graphRoot.position = _graphRootPosition;
-    }
-    #endif
     
     void HandleMouseDown(Vector2 mouse2d)
     {

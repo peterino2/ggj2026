@@ -1,29 +1,26 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 // ok i really want to try generating objects purely through code, 
 // I dont think unity is usually very good at that. is it?
 public class ScrollingRightToLeftBG : MonoBehaviour
 {
-    public Sprite foregroundSprite;
-    public Sprite midgroundSprite;
-    public Sprite backgroundSprite;
+    public Sprite[] sprites = new Sprite[] { };
+    public float[] SpeedList = new float[] {300f, 150f, 75f, 25f, 15f};
+    public Vector2[][] AnchoredPositions = new Vector2[][] {};
 
-    public float foregroundSpeed = 300f;
-    public float midgroundSpeed = 150f;
-    public float backgroundSpeed = 75f;
-
-    public Material foregroundMaterial;
-    public Material midgroundMaterial;
-    public Material backgroundMaterial;
+    public Material bgMaterial;
 
     public Camera canvasCamera;
 
     private RectTransform[][] layerImages;
     private float imageWidth;
-    private float[] speeds;
     public Canvas canvas;
     public RectTransform canvasRect;
+
+    private const int LayerCount = 5;
 
     private void Awake()
     {
@@ -31,12 +28,12 @@ public class ScrollingRightToLeftBG : MonoBehaviour
         imageWidth = canvasRect.rect.width;
         float imageHeight = canvasRect.rect.height;
 
-        Sprite[] sprites = { backgroundSprite, midgroundSprite, foregroundSprite };
-        Material[] materials = { backgroundMaterial, midgroundMaterial, foregroundMaterial };
-        speeds = new float[] { backgroundSpeed, midgroundSpeed, foregroundSpeed };
-        layerImages = new RectTransform[3][];
+        // Sprite[] sprites = { backgroundSprite, midgroundSprite, foregroundSprite };
+        layerImages = new RectTransform[LayerCount][];
+        
+        AnchoredPositions  = new Vector2[LayerCount][];
 
-        for (int layer = 0; layer < 3; layer++)
+        for (int layer = 0; layer < LayerCount; layer++)
         {
             // Skip layers with no sprite assigned
             if (sprites[layer] == null)
@@ -46,6 +43,7 @@ public class ScrollingRightToLeftBG : MonoBehaviour
             }
 
             layerImages[layer] = new RectTransform[3];
+            AnchoredPositions[layer] = new Vector2[3];
 
             for (int i = 0; i < 3; i++)
             {
@@ -60,12 +58,13 @@ public class ScrollingRightToLeftBG : MonoBehaviour
                 rect.anchorMax = new Vector2(0.5f, 0.5f);
                 rect.pivot = new Vector2(0.5f, 0.5f);
                 rect.anchoredPosition = new Vector2((i - 1) * imageWidth, 0);
+                AnchoredPositions[layer][i] = rect.anchoredPosition;
 
                 Image img = imgObj.AddComponent<Image>();
                 img.sprite = sprites[layer];
-                if (materials[layer] != null)
+                if (bgMaterial != null)
                 {
-                    img.material = materials[layer];
+                    img.material = bgMaterial;
                 }
                 img.preserveAspect = false;
 
@@ -77,13 +76,18 @@ public class ScrollingRightToLeftBG : MonoBehaviour
         }
     }
 
+    private Vector2 parallaxPos = Vector2.zero;
     private void Update()
     {
         if (layerImages == null) return;
+
+        parallaxPos = Vector2.zero;
+        Vector2 mouse2d = Mouse.current.position.ReadValue();
+        parallaxPos = mouse2d - new Vector2(1920, 1080) / 2.0f;
+        parallaxPos.x = 0;
+        parallaxPos = parallaxPos * 50 / 10000;
         
-        speeds = new float[] { backgroundSpeed, midgroundSpeed, foregroundSpeed };
-        
-        for (int layer = 0; layer < 3; layer++)
+        for (int layer = 0; layer < LayerCount; layer++)
         {
             // might not have a midground, skipping that shit
             if (layerImages[layer] == null) continue;
@@ -91,8 +95,8 @@ public class ScrollingRightToLeftBG : MonoBehaviour
             for (int i = 0; i < 3; i++)
             {
                 RectTransform rect = layerImages[layer][i];
-                Vector2 pos = rect.anchoredPosition;
-                pos.x -= speeds[layer] * Time.deltaTime;
+                Vector2 pos = AnchoredPositions[layer][i];
+                pos.x -= SpeedList[layer] * Time.deltaTime;
 
                 // Wrap around when offscreend
                 if (pos.x < -imageWidth * 1.5f)
@@ -100,7 +104,10 @@ public class ScrollingRightToLeftBG : MonoBehaviour
                     pos.x += imageWidth * 3f;
                 }
 
-                rect.anchoredPosition = pos;
+                AnchoredPositions[layer][i] = pos;
+                
+                // parallax calculation based off of ship position?
+                rect.anchoredPosition = AnchoredPositions[layer][i] + parallaxPos * (LayerCount - layer);
             }
         }
     }
