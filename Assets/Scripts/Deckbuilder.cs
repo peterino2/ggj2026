@@ -11,10 +11,10 @@ public class Deckbuilder : MonoBehaviour
 
     public GraphUpdate GraphUpdates;
 
-    private Vector2 _graphRootPosition = Vector2.zero;
-    private Vector2 _graphOffsetPosition;
-    private Vector2 _graphOffsetPositionBase;
-    private Vector2 _mouseDownPosition;
+    public Vector2 _graphRootPosition = Vector2.zero;
+    public Vector2 _graphOffsetPosition;
+    public Vector2 _graphOffsetPositionBase;
+    public Vector2 _mouseDownPosition;
     public RectTransform graphRoot;
 
     public Deckbuilder GetInstance()
@@ -77,13 +77,7 @@ public class Deckbuilder : MonoBehaviour
             return;
 
         Vector2 offset = mouse2d - _mouseDownPosition;
-        _graphOffsetPosition = offset + _graphOffsetPositionBase;
-
-        // Input.GetMouseButtonUp(0) ->
-        if (Mouse.current != null && Mouse.current.leftButton.wasReleasedThisFrame)
-        {
-            _graphOffsetPositionBase = offset;
-        }
+        _graphOffsetPosition = _graphOffsetPositionBase + offset;
     }
 
     void Update()
@@ -91,11 +85,9 @@ public class Deckbuilder : MonoBehaviour
         if (Mouse.current == null)
             return;
 
-        // Input.mousePosition ->
-        Vector2 mouse2d = Mouse.current.position.ReadValue();   // screen coords[web:19][web:21]
+        Vector2 mouse2d = Mouse.current.position.ReadValue();
 
-        // Input.GetMouseButtonDown(0) ->
-        if (Mouse.current.leftButton.wasPressedThisFrame)       // GetMouseButtonDown[web:21][web:30]
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             MouseDown = true;
             _mouseDownPosition = mouse2d;
@@ -103,13 +95,13 @@ public class Deckbuilder : MonoBehaviour
 
         if (Mouse.current.leftButton.wasReleasedThisFrame)
         {
-            MouseDown = true;
+            MouseDown = false;
+            _graphOffsetPositionBase = _graphOffsetPosition;
         }
 
-        _graphOffsetPosition = _graphOffsetPositionBase;
         HandleMouseDown(mouse2d);
 
-        graphRoot.position = _graphOffsetPosition;
+        graphRoot.position = _graphRootPosition + _graphOffsetPosition;
     }
 
 }
