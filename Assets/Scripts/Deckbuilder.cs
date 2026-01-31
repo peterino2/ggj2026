@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections.Generic;
 
 public class Deckbuilder : MonoBehaviour
 {
@@ -19,9 +20,41 @@ public class Deckbuilder : MonoBehaviour
     public RectTransform gridBounds;
     public Camera canvasCamera;
 
+    private List<PowerNode> floatingNodes = new List<PowerNode>();
+    private List<PowerNode> dragCandidates = new List<PowerNode>();
+    private PowerNode currentlyDragging;
+
     public static Deckbuilder GetInstance()
     {
         return gDeckBuilder;
+    }
+
+    public void RegisterFloatingNode(PowerNode node)
+    {
+        if (!floatingNodes.Contains(node))
+            floatingNodes.Add(node);
+    }
+
+    public void UnregisterFloatingNode(PowerNode node)
+    {
+        floatingNodes.Remove(node);
+    }
+
+    public List<PowerNode> GetFloatingNodes()
+    {
+        return floatingNodes;
+    }
+
+    public void SubmitDragCandidate(PowerNode node)
+    {
+        if (currentlyDragging == null && !dragCandidates.Contains(node))
+            dragCandidates.Add(node);
+    }
+
+    public void StopDragging(PowerNode node)
+    {
+        if (currentlyDragging == node)
+            currentlyDragging = null;
     }
 
     void Awake()
@@ -92,7 +125,14 @@ public class Deckbuilder : MonoBehaviour
 
         HandleMouseDown(mouse2d);
 
+        // Select first drag candidate if any
+        if (dragCandidates.Count > 0 && currentlyDragging == null)
+        {
+            currentlyDragging = dragCandidates[0];
+            currentlyDragging.StartDragging();
+        }
+        dragCandidates.Clear();
+
         graphRoot.position = _graphRootPosition + _graphOffsetPosition;
     }
-
 }

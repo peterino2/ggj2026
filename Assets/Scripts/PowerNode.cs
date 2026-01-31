@@ -15,6 +15,9 @@ public class PowerNode : MonoBehaviour
     public float edgeMargin = 0.5f;
     public float edgeForceStrength = 10f;
 
+    public float separationDistance = 1f;
+    public float separationForce = 5f;
+
     public Camera mainCamera;
     public SpriteRenderer selectionSprite;
     
@@ -38,19 +41,28 @@ public class PowerNode : MonoBehaviour
         noiseOffset = new Vector2(Random.Range(0f, 100f), Random.Range(0f, 100f));
     }
 
+    private void Start()
+    {
+        Deckbuilder.GetInstance()?.RegisterFloatingNode(this);
+    }
+
+    private void OnDestroy()
+    {
+        Deckbuilder.GetInstance()?.UnregisterFloatingNode(this);
+    }
+
     private void Update()
     {
         if (Mouse.current == null) return;
 
         Vector2 screenPos = Mouse.current.position.ReadValue();
         
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        // Submit self as drag candidate if clicked
+        if (Mouse.current.leftButton.wasPressedThisFrame && currentState != NodeState.Dragging)
         {
             if (IsPointerOverNode(screenPos))
             {
-                currentState = NodeState.Dragging;
-                velocity = Vector3.zero;
-                transform.SetAsLastSibling();
+                Deckbuilder.GetInstance()?.SubmitDragCandidate(this);
             }
         }
 
@@ -60,6 +72,7 @@ public class PowerNode : MonoBehaviour
             {
                 currentState = NodeState.Floating;
                 floatingVelocity = velocity;
+                Deckbuilder.GetInstance()?.StopDragging(this);
             }
         }
 
@@ -88,6 +101,9 @@ public class PowerNode : MonoBehaviour
 
         // Screen edge repulsion force
         totalForce += HandleEdgeForce();
+
+        // Flocking separation force
+        totalForce += HandleAntiFlockForce();
 
         floatingVelocity += totalForce * Time.deltaTime;
         
@@ -139,7 +155,48 @@ public class PowerNode : MonoBehaviour
         return force;
     }
 
-    private bool IsPointerOverNode(Vector2 screenPos)
+    private Vector3 HandleAntiFlockForce()
+    {
+        Vector3 force = Vector3.zero;
+        var nodes = Deckbuilder.GetInstance()?.GetFloatingNodes();
+        if (nodes == null) return force;
+
+        foreach (PowerNode other in nodes)
+        {
+            if (other == this) continue;
+            
+            Vector3 toSelf = transform.position - other.transform.position;
+            float dist = toSelf.magnitude;
+            
+            if (dist < separationDistance)
+            {
+                Vector3 pushDir;
+                if (dist < 0.01f)
+                {
+                    float angle = Random.Range(0f, Mathf.PI * 2f);
+                    pushDir = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0f);
+                }
+                else
+                {
+                    pushDir = toSelf.normalized;
+                }
+                
+                float strength = (separationDistance - dist) / separationDistance;
+                force += separationForce * strength * pushDir;
+            }
+        }
+
+        return force;
+    }
+
+    public void StartDragging()
+    {
+        currentState = NodeState.Dragging;
+        velocity = Vector3.zero;
+        transform.SetAsLastSibling();
+    }
+
+    public bool IsPointerOverNode(Vector2 screenPos)
     {
         return RectTransformUtility.RectangleContainsScreenPoint(rectTransform, screenPos, mainCamera);
     }
