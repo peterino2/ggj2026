@@ -14,7 +14,7 @@ public class AutoGunBullet : MonoBehaviour
         
     }
 
-    void SetOwner(ObjectPool<AutoGunBullet> NewOwner)
+    public void SetOwner(ObjectPool<AutoGunBullet> NewOwner)
     {
         Owner = NewOwner;
     }
@@ -34,6 +34,8 @@ public class AutoGunBullet : MonoBehaviour
         if(gameObject.transform.position.x > 2000.0f)
         {
             Owner.Release(this);
+            gameObject.transform.position = Vector3.zero;
+            gameObject.SetActive(false);
         }
     }
 }
