@@ -19,7 +19,7 @@ public class Deckbuilder : MonoBehaviour
     public RectTransform gridBounds;
     public Camera canvasCamera;
 
-    public Deckbuilder GetInstance()
+    public static Deckbuilder GetInstance()
     {
         return gDeckBuilder;
     }
@@ -28,9 +28,13 @@ public class Deckbuilder : MonoBehaviour
     {
         gDeckBuilder = this;
         _graphRootPosition = graphRoot.position;
+        
+        // mlg pro tip for prototyping 2d games, makes physics and custom visual effects
+        // mega consistent.
+        Application.targetFrameRate = 60; 
     }
 
-    bool IsMouseInGridBounds(Vector2 screenPos)
+    public bool IsMouseInGridBounds(Vector2 screenPos)
     {
         return RectTransformUtility.RectangleContainsScreenPoint(gridBounds, screenPos, canvasCamera);
     }
