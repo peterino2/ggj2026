@@ -131,11 +131,14 @@ MonoBehaviour:
   - {fileID: 6027150028116766329}
   - {fileID: 791262094826382790}
   - {fileID: 4505987494796771398}
+  currentState: 0
   NodeName: Shooty Node
   Description: This node will fire an energy blast when shot
   rarity: 0
   RepeatDelay: 0.1
   RepeatMultiplier: 0.1
+  PulsedirectionIndicator: {fileID: 9185755703397184633, guid: d3d0810688b904b9491222c59430c840, type: 3}
+  PulseDirections: []
 --- !u!1 &4701306759505766862
 GameObject:
   m_ObjectHideFlags: 0

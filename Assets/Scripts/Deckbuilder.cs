@@ -126,7 +126,6 @@ public class Deckbuilder : MonoBehaviour
         {
             hoveredNodeValid = false;
         }
-            
 
         if (Mouse.current.middleButton.wasPressedThisFrame && IsMouseInGridBounds(mouse2d))
         {

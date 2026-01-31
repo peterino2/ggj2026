@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Random = UnityEngine.Random;
 
 public class PowerNode : MonoBehaviour
 {
@@ -51,6 +53,11 @@ public class PowerNode : MonoBehaviour
     public float RepeatDelay = 0.1f;
     public float RepeatMultiplier = 0.1f;
 
+    public GameObject PulsedirectionIndicator;
+    public Vector2[] PulseDirections = new Vector2[] {};
+
+    public RectTransform[] pulseIndicators = new RectTransform[] {};
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
@@ -67,7 +74,24 @@ public class PowerNode : MonoBehaviour
     {
         if (sceneParent == null)
             sceneParent = transform.parent;
+        
+        UpdatePulseDirections();
+        
         Deckbuilder.GetInstance()?.RegisterFloatingNode(this);
+    }
+    
+    public void UpdatePulseDirections()
+    {
+        foreach (var dir in PulseDirections)
+        {
+            GameObject go = Instantiate(PulsedirectionIndicator, Vector3.zero, Quaternion.identity);
+            RectTransform rt = go.GetComponent<RectTransform>();
+            rt.SetParent(transform);
+            rt.localPosition = new Vector3(0,0,-2);
+            rt.localScale = Vector3.one;
+            float deg = (float) ((180.0 / Math.PI) * Math.Atan2(dir.y, dir.x));
+            rt.rotation = Quaternion.Euler(0f, 0f, deg);
+        }
     }
 
     private void OnDestroy()
