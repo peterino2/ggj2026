@@ -103,22 +103,24 @@ public class DeckBuilderInspector : MonoBehaviour
 
         if (nameText != null)
         {
-            nameText.text = node.NodeName;
 
             if (node.rarity == PowerNode.Rarity.Common)
             {
+                nameText.text = node.NodeName;
                 nameText.color = commonColor;
                 nameText.material = commonMaterial;
             }
 
             if (node.rarity == PowerNode.Rarity.Rare)
             {
+                nameText.text = node.NodeName + "(Rare)";
                 nameText.color = rareColor;
                 nameText.material = rareMaterial;
             }
 
             if (node.rarity == PowerNode.Rarity.Legendary)
             {
+                nameText.text = node.NodeName + "(Legendary)";
                 nameText.color = legendColor;
                 nameText.material = legendMaterial;
             }
