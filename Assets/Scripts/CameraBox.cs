@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class CameraBox : MonoBehaviour
 {
-    public Camera cam;
-    public Vector2 playSize;
+    private Camera cam;
     private BoxCollider2D camBox;
     private float sizex, sizey, ratio;
 
@@ -17,7 +16,7 @@ public class CameraBox : MonoBehaviour
 
     void Update()
     {
-        sizey = cam.orthographicSize * 2f;
+        sizey = cam.orthographicSize * 2;
         ratio = (Screen.width / (float)Screen.height);
         sizex =  sizey * ratio;
         camBox.size = new Vector2(sizex, sizey);

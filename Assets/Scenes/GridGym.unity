@@ -993,9 +993,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34a15e836f536f14eaefff4f8c0e53ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraBox
-  cam: {fileID: 0}
-  playSize: {x: 0, y: 0}
-  backgroundPlaceholder: {fileID: 1495850894}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
