@@ -12,6 +12,8 @@ Shader "Custom/SpriteLitGlow"
         _EmissionPulseSpeed("Emission Pulse Speed", Float) = 2.0
         _EmissionPulseMin("Emission Pulse Min", Range(0.0, 1.0)) = 0.2
         _EmissionPulseMax("Emission Pulse Max", Range(0.0, 5.0)) = 1.0
+        
+        _ClipRect("Clip Rect", Vector) = (-10000, -10000, 10000, 10000)
 
         _Cutoff("Alpha Clipping", Range(0.0, 1.0)) = 0.5
 
@@ -155,6 +157,7 @@ Shader "Custom/SpriteLitGlow"
             float _EmissionPulseSpeed;
             float _EmissionPulseMin;
             float _EmissionPulseMax;
+            float4 _ClipRect;
 
             float2 RotateUV(float2 uv, float angle)
             {
@@ -178,6 +181,14 @@ Shader "Custom/SpriteLitGlow"
             #endif
             )
             {
+                // Clip to rect bounds in world space
+                float2 worldPos = input.positionWS.xy;
+                if (worldPos.x < _ClipRect.x || worldPos.x > _ClipRect.z ||
+                    worldPos.y < _ClipRect.y || worldPos.y > _ClipRect.w)
+                {
+                    discard;
+                }
+
                 // Rotate UVs in fragment shader so it works on quads/sprites
                 input.uv = RotateUV(input.uv, _Time.y * _RotationSpeed);
 

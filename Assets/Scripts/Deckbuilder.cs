@@ -67,6 +67,7 @@ public class Deckbuilder : MonoBehaviour
         Application.targetFrameRate = 60; 
     }
 
+    // really a misnomer but i dont wanna do a rename at this point
     public bool IsMouseInGridBounds(Vector2 screenPos)
     {
         return RectTransformUtility.RectangleContainsScreenPoint(gridBounds, screenPos, canvasCamera);

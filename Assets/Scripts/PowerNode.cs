@@ -20,6 +20,9 @@ public class PowerNode : MonoBehaviour
 
     public Camera mainCamera;
     public SpriteRenderer selectionSprite;
+    public SpriteRenderer dockedSprite;
+    public Transform sceneParent;
+    public SpriteRenderer[] clippedRenderers;
     
 
     private RectTransform rectTransform;
@@ -29,6 +32,9 @@ public class PowerNode : MonoBehaviour
     private Vector3 anchorPosition;
     private Vector2 noiseOffset;
     private Vector3 floatingVelocity;
+    private bool wasDocked;
+    private MaterialPropertyBlock propertyBlock;
+    private static readonly int ClipRectID = Shader.PropertyToID("_ClipRect");
 
     private void Awake()
     {
@@ -39,10 +45,13 @@ public class PowerNode : MonoBehaviour
         }
         anchorPosition = transform.position;
         noiseOffset = new Vector2(Random.Range(0f, 100f), Random.Range(0f, 100f));
+        propertyBlock = new MaterialPropertyBlock();
     }
 
     private void Start()
     {
+        if (sceneParent == null)
+            sceneParent = transform.parent;
         Deckbuilder.GetInstance()?.RegisterFloatingNode(this);
     }
 
@@ -62,7 +71,17 @@ public class PowerNode : MonoBehaviour
         {
             if (IsPointerOverNode(screenPos))
             {
-                Deckbuilder.GetInstance()?.SubmitDragCandidate(this);
+                if (currentState == NodeState.Floating)
+                {
+                    Deckbuilder.GetInstance().SubmitDragCandidate(this);
+                }
+                else if (currentState == NodeState.Docked)
+                {
+                    if (Deckbuilder.GetInstance().IsMouseInGridBounds(screenPos))
+                    {
+                        Deckbuilder.GetInstance().SubmitDragCandidate(this);
+                    }
+                }
             }
         }
 
@@ -70,22 +89,28 @@ public class PowerNode : MonoBehaviour
         {
             if (currentState == NodeState.Dragging)
             {
-                currentState = NodeState.Floating;
-                floatingVelocity = velocity;
-                Deckbuilder.GetInstance()?.StopDragging(this);
+                HandleDragRelease(screenPos);
             }
         }
 
         if (currentState == NodeState.Dragging)
         {
-            selectionSprite.enabled = true;
             targetWorldPosition = ScreenToWorldOnNodePlane(screenPos);
             ApplySpringPhysics();
+            
+            selectionSprite.enabled = true;
+            dockedSprite.enabled = false;
         }
         else if(currentState == NodeState.Floating)
         {
             selectionSprite.enabled = false;
+            dockedSprite.enabled = false;
             HandleFloating();
+        }
+        else if (currentState == NodeState.Docked)
+        {
+            selectionSprite.enabled = false;
+            dockedSprite.enabled = true;
         }
     }
 
@@ -191,9 +216,84 @@ public class PowerNode : MonoBehaviour
 
     public void StartDragging()
     {
+        wasDocked = (currentState == NodeState.Docked);
+        
+        if (wasDocked)
+        {
+            UndockToScene();
+        }
+        
         currentState = NodeState.Dragging;
         velocity = Vector3.zero;
         transform.SetAsLastSibling();
+    }
+
+    private void HandleDragRelease(Vector2 screenPos)
+    {
+        Deckbuilder db = Deckbuilder.GetInstance();
+        db.StopDragging(this);
+        
+        Vector3 thisScreenPos = mainCamera.WorldToScreenPoint(transform.position);
+        
+        if (db.IsMouseInGridBounds(screenPos) && db.IsMouseInGridBounds(new Vector2 (thisScreenPos.x, thisScreenPos.y)))
+        {
+            DockToDeckBuilder();
+        }
+        else
+        {
+            currentState = NodeState.Floating;
+            floatingVelocity = velocity;
+        }
+    }
+
+    private void DockToDeckBuilder()
+    {
+        Deckbuilder db = Deckbuilder.GetInstance();
+        
+        db.UnregisterFloatingNode(this);
+        transform.SetParent(db.graphRoot, true);
+        currentState = NodeState.Docked;
+        velocity = Vector3.zero;
+        
+        ApplyClipRect(db.gridBounds);
+    }
+
+    private void UndockToScene()
+    {
+        Deckbuilder db = Deckbuilder.GetInstance();
+        db?.RegisterFloatingNode(this);
+        transform.SetParent(sceneParent, true);
+        
+        ClearClipRect();
+    }
+
+    private void ApplyClipRect(RectTransform clipSource)
+    {
+        if (clippedRenderers == null) return;
+        
+        Vector3[] corners = new Vector3[4];
+        clipSource.GetWorldCorners(corners);
+        Vector4 clipRect = new Vector4(corners[0].x, corners[0].y, corners[2].x, corners[2].y);
+        
+        foreach (var sr in clippedRenderers)
+        {
+            sr.GetPropertyBlock(propertyBlock);
+            propertyBlock.SetVector(ClipRectID, clipRect);
+            sr.SetPropertyBlock(propertyBlock);
+        }
+    }
+
+    private void ClearClipRect()
+    {
+        if (clippedRenderers == null) return;
+        
+        Vector4 noClip = new Vector4(-10000, -10000, 10000, 10000);
+        foreach (var sr in clippedRenderers)
+        {
+            sr.GetPropertyBlock(propertyBlock);
+            propertyBlock.SetVector(ClipRectID, noClip);
+            sr.SetPropertyBlock(propertyBlock);
+        }
     }
 
     public bool IsPointerOverNode(Vector2 screenPos)
