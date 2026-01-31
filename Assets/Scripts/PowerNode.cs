@@ -18,6 +18,11 @@ public class PowerNode : MonoBehaviour
     public float separationDistance = 1f;
     public float separationForce = 5f;
 
+    public string nodeName;
+    public string description;
+    public float repeatDelay;
+    public float repeatMultiplier = 1f;
+
     public Camera mainCamera;
     public SpriteRenderer selectionSprite;
     public SpriteRenderer dockedSprite;
@@ -26,7 +31,7 @@ public class PowerNode : MonoBehaviour
     
 
     private RectTransform rectTransform;
-    private NodeState currentState = NodeState.Floating;
+    public NodeState currentState = NodeState.Floating;
     private Vector3 targetWorldPosition;
     private Vector3 velocity;
     private Vector3 anchorPosition;
@@ -36,6 +41,15 @@ public class PowerNode : MonoBehaviour
     private MaterialPropertyBlock propertyBlock;
     private static readonly int ClipRectID = Shader.PropertyToID("_ClipRect");
     private Vector2 dragOffset;
+    
+    // deckboard simulation stuff
+
+    public enum Rarity { Common, Rare, Legendary }
+    public string NodeName;
+    public string Description;
+    public Rarity rarity = Rarity.Common; // 
+    public float RepeatDelay = 0.1f;
+    public float RepeatMultiplier = 0.1f;
 
     private void Awake()
     {
@@ -66,11 +80,21 @@ public class PowerNode : MonoBehaviour
         if (Mouse.current == null) return;
 
         Vector2 screenPos = Mouse.current.position.ReadValue();
+
+        bool isHovered = IsPointerOverNode(screenPos);
+
+        // lmao this is a really disgusting hack but unity scene order always seems to update deterministically
+        if (isHovered)
+        {
+            Deckbuilder db = Deckbuilder.GetInstance();
+            db.hoveredNode = this;
+            db.hasHover = true;
+        }
         
         // Submit self as drag candidate if clicked
         if (Mouse.current.leftButton.wasPressedThisFrame && currentState != NodeState.Dragging)
         {
-            if (IsPointerOverNode(screenPos))
+            if (isHovered)
             {
                 if (currentState == NodeState.Floating)
                 {
@@ -322,5 +346,10 @@ public class PowerNode : MonoBehaviour
         velocity += springForce * Time.deltaTime;
         velocity *= damping;
         transform.position += velocity * Time.deltaTime;
+    }
+
+    public virtual void OnPulse()
+    {
+        
     }
 }

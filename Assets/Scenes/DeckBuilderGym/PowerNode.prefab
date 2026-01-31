@@ -119,6 +119,10 @@ MonoBehaviour:
   edgeForceStrength: 10
   separationDistance: 100
   separationForce: 200
+  nodeName: 
+  description: 
+  repeatDelay: 0
+  repeatMultiplier: 1
   mainCamera: {fileID: 0}
   selectionSprite: {fileID: 791262094826382790}
   dockedSprite: {fileID: 4505987494796771398}
@@ -127,6 +131,11 @@ MonoBehaviour:
   - {fileID: 6027150028116766329}
   - {fileID: 791262094826382790}
   - {fileID: 4505987494796771398}
+  NodeName: Shooty Node
+  Description: This node will fire an energy blast when shot
+  rarity: 0
+  RepeatDelay: 0.1
+  RepeatMultiplier: 0.1
 --- !u!1 &4701306759505766862
 GameObject:
   m_ObjectHideFlags: 0

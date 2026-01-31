@@ -19,10 +19,15 @@ public class Deckbuilder : MonoBehaviour
     public RectTransform graphRoot;
     public RectTransform gridBounds;
     public Camera canvasCamera;
+    
+    public PowerNode hoveredNode;
+    public bool hoveredNodeValid = false;
 
     private List<PowerNode> floatingNodes = new List<PowerNode>();
     private List<PowerNode> dragCandidates = new List<PowerNode>();
     private PowerNode currentlyDragging;
+
+    public bool hasHover = false;
 
     public static Deckbuilder GetInstance()
     {
@@ -112,6 +117,17 @@ public class Deckbuilder : MonoBehaviour
 
         Vector2 mouse2d = Mouse.current.position.ReadValue();
 
+        if (hasHover)
+        {
+            hoveredNodeValid = true;
+            hasHover = false;
+        }
+        else
+        {
+            hoveredNodeValid = false;
+        }
+            
+
         if (Mouse.current.middleButton.wasPressedThisFrame && IsMouseInGridBounds(mouse2d))
         {
             MouseDown = true;
@@ -136,4 +152,20 @@ public class Deckbuilder : MonoBehaviour
 
         graphRoot.position = _graphRootPosition + _graphOffsetPosition;
     }
+    
+    // Graph operations
+    // ok heres the plan
+    
+    // the graph will have a root node, this node is a mask that sits in the center of the board, when its docked it cannot be moved
+    // placing down other nodes will do nothing until you connect the node to the root node somehow.
+    // the mask itself has a maximum connection length. and can only make one connection
+    
+    // each node can make some fixed number of connections
+    // pulses take some time to travel down the nodes based on distance
+    
+    // when pulses hit a node, it activates and after a short delay, that node sends pulses down to subsequent nodes.
+    // some nodes have an effect that be activated via right click. such as the repeater node
+    // the pulses also contain a float value called 'power' which nodes can either decrement or increment
+    
+    // fastest way to do this is with a reference list of power nodes.
 }
