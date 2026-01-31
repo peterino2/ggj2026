@@ -1,5 +1,4 @@
-// Probably the most common time of wave.
-// Enemies spawn at random location and at a certain frequency.
+// Enemies spawn in a line. With the option to add a diagonal offset for each subsequent spawn.
 
 using UnityEngine;
 
