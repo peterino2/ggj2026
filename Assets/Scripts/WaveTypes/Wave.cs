@@ -15,9 +15,14 @@ public class Wave : MonoBehaviour
         }
     }
 
+    public float getRandomY()
+    {
+        return Random.Range(spawnRange.min, spawnRange.max);
+    }
+
     public void SpawnRandom() // Same as spawn, but pick the Y position for you
     {
-        Spawn(Random.Range(spawnRange.min, spawnRange.max));
+        Spawn(getRandomY());
     }
 
     public void Spawn(float yPos)

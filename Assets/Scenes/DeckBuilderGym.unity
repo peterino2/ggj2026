@@ -399,6 +399,10 @@ MonoBehaviour:
   pendingWaveSpawns:
   - wave: {fileID: 2263165076916363287, guid: 94f4e5722de1dd24b93984ddf5b686c7, type: 3}
     delay: 2
+  - wave: {fileID: 8321541584843545598, guid: 2220498e64223cd4d8b1b488911c1de5, type: 3}
+    delay: 12
+  - wave: {fileID: 8321541584843545598, guid: 0a9c8cdfc4f5fce44a287bbb5498de60, type: 3}
+    delay: 3
   maxSpawnLimit: {fileID: 585659092}
   minSpawnLimit: {fileID: 1505341183}
 --- !u!4 &688631386
