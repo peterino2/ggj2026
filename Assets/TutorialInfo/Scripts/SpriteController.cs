@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 /// and either a BoxCollider2D or other collider for collision detection.
 /// Uses the new Input System package.
 /// </summary>
-public class PlayerController : MonoBehaviour
+public class SpriteController : MonoBehaviour
 {
     [SerializeField]
     public float moveSpeed = 5f;
