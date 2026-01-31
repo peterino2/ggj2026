@@ -16,6 +16,8 @@ public class Deckbuilder : MonoBehaviour
     public Vector2 _graphOffsetPositionBase;
     public Vector2 _mouseDownPosition;
     public RectTransform graphRoot;
+    public RectTransform gridBounds;
+    public Camera canvasCamera;
 
     public Deckbuilder GetInstance()
     {
@@ -26,6 +28,11 @@ public class Deckbuilder : MonoBehaviour
     {
         gDeckBuilder = this;
         _graphRootPosition = graphRoot.position;
+    }
+
+    bool IsMouseInGridBounds(Vector2 screenPos)
+    {
+        return RectTransformUtility.RectangleContainsScreenPoint(gridBounds, screenPos, canvasCamera);
     }
     
     // Start is called once before the first execution of Update after the MonoBehaviour is create
@@ -76,8 +83,23 @@ public class Deckbuilder : MonoBehaviour
         if (!MouseDown)
             return;
 
+        if (!IsMouseInGridBounds(mouse2d))
+        {
+            MouseDown = false;
+            _graphOffsetPositionBase = _graphOffsetPosition;
+            return;
+        }
+
         Vector2 offset = mouse2d - _mouseDownPosition;
         _graphOffsetPosition = _graphOffsetPositionBase + offset;
+        ClampOffset();
+    }
+
+    void ClampOffset()
+    {
+        Vector2 limit = gridBounds.rect.size * 0.75f; // half of 1.5x
+        _graphOffsetPosition.x = Mathf.Clamp(_graphOffsetPosition.x, -limit.x, limit.x);
+        _graphOffsetPosition.y = Mathf.Clamp(_graphOffsetPosition.y, -limit.y, limit.y);
     }
 
     void Update()
@@ -87,13 +109,13 @@ public class Deckbuilder : MonoBehaviour
 
         Vector2 mouse2d = Mouse.current.position.ReadValue();
 
-        if (Mouse.current.leftButton.wasPressedThisFrame)
+        if (Mouse.current.middleButton.wasPressedThisFrame && IsMouseInGridBounds(mouse2d))
         {
             MouseDown = true;
             _mouseDownPosition = mouse2d;
         }
 
-        if (Mouse.current.leftButton.wasReleasedThisFrame)
+        if (Mouse.current.middleButton.wasReleasedThisFrame)
         {
             MouseDown = false;
             _graphOffsetPositionBase = _graphOffsetPosition;

@@ -91,7 +91,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c6c295601d5473da71b0d97c92a4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  _graphRootPosition: {x: 0, y: 0}
+  _graphOffsetPosition: {x: 0, y: 0}
+  _graphOffsetPositionBase: {x: 0, y: 0}
+  _mouseDownPosition: {x: 0, y: 0}
   graphRoot: {fileID: 8864022012940455410}
+  gridBounds: {fileID: 702557407081411759}
+  canvasCamera: {fileID: 0}
   MouseDown: 0
 --- !u!50 &3719550677500652610
 Rigidbody2D:
