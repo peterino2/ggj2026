@@ -624,6 +624,9 @@ MonoBehaviour:
   - 4181
   - 10946
   - 28657
+  ScrapMovementSpeed: 200
+  ScrapCollectionRange: 65
+  ScrapPositionOffset: 30
   ScrapPrefabs:
   - {fileID: 8074615714495503796, guid: baf845bd89268a547b04498cc67f8485, type: 3}
   - {fileID: 584772141033304540, guid: 649d9cd3c8d898f4387926f78fa0bd0e, type: 3}
