@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float waveAmp = 2;
     [SerializeField] private float arcAmp = 0.1f;
     private float velocityIncreaseMultiplier = 0.10f;
-    private float hpIncrease = 20;
+    private float hpIncrease = 30;
     [SerializeField] private movementType movementOption = movementType.Straight;
     private float internalTimer = 0f;
     private Rigidbody2D.SlideMovement SlideMovement = new Rigidbody2D.SlideMovement();
