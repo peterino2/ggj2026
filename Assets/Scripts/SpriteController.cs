@@ -12,6 +12,7 @@ public class SpriteController : MonoBehaviour
 {
     [SerializeField]
     public float moveSpeed = 5f;
+    public float Health = 10.0f;
 
     public Rigidbody2D rb;
     private Vector2 moveInput;

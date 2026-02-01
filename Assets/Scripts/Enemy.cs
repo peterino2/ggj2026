@@ -122,6 +122,7 @@ public class Enemy : MonoBehaviour
             curHP -= 10;
             if (curHP <= 0)
             { 
+                XPBarSystem.GetInstance().AddXP(3);
                 Destroy(gameObject);
             }
         }
