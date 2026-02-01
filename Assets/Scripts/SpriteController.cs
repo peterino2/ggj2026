@@ -12,12 +12,29 @@ public class SpriteController : MonoBehaviour
 {
     [SerializeField]
     public float moveSpeed = 5f;
-    public float Health = 10.0f;
+    public float Health = 100.0f;
 
     public Rigidbody2D rb;
     private Vector2 moveInput;
     
     public static SpriteController gPlayer;
+
+    public void takeDamage(float damage)
+    {
+        HPBar.instance.TakeDamage(damage);
+        Health -= damage;
+
+        if (Health <= 0.0f)
+        {
+            Gamemode.Instance.GameOver();
+        }
+    }
+
+    public void takeHealing(float value)
+    {
+        Health += value;
+        HPBar.instance.SetHP(Health);
+    }
 
     public static SpriteController GetPlayer()
     {
@@ -73,6 +90,11 @@ public class SpriteController : MonoBehaviour
                 moveInput.x += 1;
             if (keyboard.aKey.isPressed)
                 moveInput.x -= 1;
+        }
+
+        if (Keyboard.current.iKey.wasPressedThisFrame)
+        {
+            takeDamage(20.0f);
         }
 
         // Gamepad/Controller input (left stick)

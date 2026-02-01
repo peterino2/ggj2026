@@ -109,6 +109,7 @@ public class AutoGun : WeaponBase
             {
                 TimeSinceLastShot = 0.0f;
                 FireBullet(new Vector3(BulletSpeed, 0.0f, 0.0f));
+                AudioPlayer.Instance.Play(SoundType.AutoGun);
             }
         }
     }

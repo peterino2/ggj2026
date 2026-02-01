@@ -6,7 +6,7 @@ namespace DefaultNamespace.NodeEffects
     {
         public override void OnPulse(float pulseStrength)
         {
-            // TODO: Implement repair functionality
+            SpriteController.gPlayer.takeHealing(pulseStrength * parentNode.NodePower);
         }
     }
 }

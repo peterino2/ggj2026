@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpriteController
   moveSpeed: 600
+  Health: 100
   rb: {fileID: 2726720563586504838}
 --- !u!50 &2726720563586504838
 Rigidbody2D:

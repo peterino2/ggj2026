@@ -114,4 +114,7 @@ MonoBehaviour:
   instigator: {fileID: 0}
   dir: {x: 1, y: 0}
   pulsepos: {x: 0, y: 0}
+  minBrightness: 0.2
+  maxBrightness: 2
+  powerScaleFactor: 1
   rt: {fileID: 0}
