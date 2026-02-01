@@ -12,6 +12,7 @@ public class PowerNode : MonoBehaviour
 
     public float springStrength = 15f;
     public float damping = 0.75f;
+    
 
     public float floatAmplitude = 0.1f;
     public float floatSpeed = 1f;
@@ -65,6 +66,7 @@ public class PowerNode : MonoBehaviour
     public float NodePower = 1.0f;
     public float RepeatDelay = 0.1f;
     public float powerFactor = 0.1f;
+    public float minPulsePower = 0.2f;
 
     private void Awake()
     {
@@ -424,6 +426,11 @@ public class PowerNode : MonoBehaviour
 
     public virtual void OnPulse(float pulseStrength)
     {
+        if (pulseStrength < minPulsePower)
+        {
+            return;
+        }
+            
         foreach (var dir in PulseDirections)
         {
             GeneratePulse(dir, pulseStrength * powerFactor);
