@@ -21,6 +21,7 @@ public class AutoGun : WeaponBase
 
     // How fast bullet go
     [SerializeField] float BulletSpeed = 300.0f;
+    [SerializeField] Transform bulletSpawnPosition;
 
     private float TimeSinceLastShot = 0.0f;
 
@@ -41,7 +42,7 @@ public class AutoGun : WeaponBase
     {
         AutoGunBullet Bullet = BulletPool.Get();
         Bullet.gameObject.transform.SetParent(gameObject.transform.parent, false);
-        Bullet.gameObject.transform.position = gameObject.transform.position;
+        Bullet.gameObject.transform.position = bulletSpawnPosition.position;
         Bullet.Velocity = Velocity;
         Bullet.gameObject.SetActive(true);
 
