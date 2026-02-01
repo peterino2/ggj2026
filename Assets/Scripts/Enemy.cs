@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
@@ -57,6 +58,10 @@ public class Enemy : MonoBehaviour
         else if (movementOption == movementType.DownwardArc) {
             movementDownwardArc();
         }
+        if (isOutOfBounds())
+        {
+            Destroy(gameObject);
+        }
     }
 
     void movementStraight()
@@ -101,6 +106,10 @@ public class Enemy : MonoBehaviour
 
     }
 
+    bool isOutOfBounds() {
+        return (transform.position.x > 4000 || transform.position.x < -4000 || transform.position.y > 3000 || transform.position.y < -3000);
+     
+    }
 
 }
 
