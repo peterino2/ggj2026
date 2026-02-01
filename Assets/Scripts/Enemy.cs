@@ -6,9 +6,9 @@ public class Enemy : MonoBehaviour
     private Rigidbody2D body;
     [Header("Ship Parameters")]
     [SerializeField] private float velocity = 5f;
-    [SerializeField] private float maxHP = 1000f;
-    [SerializeField] private float curHP = 1000f;
-    [SerializeField] private float damage = 10f;
+    [SerializeField] private float maxHP = 100f;
+    [SerializeField] private float curHP = 100f;
+    [SerializeField] private float damage = 100f;
     [SerializeField] private float circleRadius = 5;
     [SerializeField] private float waveAmp = 2;
     [SerializeField] private float arcAmp = 0.1f;
@@ -111,5 +111,17 @@ public class Enemy : MonoBehaviour
      
     }
 
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("PlayerBullet"))
+        {
+            //takeDamage
+            curHP -= 10;
+            if (curHP <= 0)
+            { 
+                Destroy(gameObject);
+            }
+        }
+    }
 }
 
