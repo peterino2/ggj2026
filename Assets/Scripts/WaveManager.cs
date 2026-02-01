@@ -2,6 +2,7 @@
 
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 
 // Defines a specific spawn in time.
@@ -39,11 +40,49 @@ public class WaveManager : MonoBehaviour
 
     public Transform spawnParent;
 
+    [SerializeField] Wave spawnStraightPrefab;
+    [SerializeField] Wave spawnCirc2Prefab;
+    [SerializeField] Wave spawnWave3Prefab;
+    [SerializeField] Wave spawnSpreadWavePrefab;
+
     private void Start()
     {
         if (maxSpawnLimit != null && minSpawnLimit != null)
         {
             spawnRange = new SpawnRange(minSpawnLimit.transform.position.y, maxSpawnLimit.transform.position.y, minSpawnLimit.transform.position.x);
+        }
+
+        float diff = Gamemode.Instance.GetDifficulty();
+
+        WaveSpawn ws = new WaveSpawn();
+        ws.wave = spawnStraightPrefab;
+        ws.delay = 2;
+        pendingWaveSpawns.Add(ws);
+        AddWaves(4, diff);
+        
+    }
+    private void AddWaves(int waves, float diff) {
+        for (int i = 0; i < waves; i++)
+        {
+            WaveSpawn ws = new WaveSpawn();
+            ws.wave = spawnStraightPrefab;
+            ws.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            pendingWaveSpawns.Add(ws);
+            Debug.Log("diff is " + diff);
+            WaveSpawn ws2 = new WaveSpawn();
+            ws2.wave = spawnCirc2Prefab;
+            ws2.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            pendingWaveSpawns.Add(ws2);
+
+            WaveSpawn ws3 = new WaveSpawn();
+            ws3.wave = spawnWave3Prefab;
+            ws3.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            pendingWaveSpawns.Add(ws3);
+
+            WaveSpawn ws4 = new WaveSpawn();
+            ws4.wave = spawnSpreadWavePrefab;
+            ws4.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            pendingWaveSpawns.Add(ws4);
         }
     }
 
@@ -66,6 +105,10 @@ public class WaveManager : MonoBehaviour
             {
                 pendingWaveSpawns[0] = nextWaveSpawn; // Ya I'm C# rusty... Structs are all by copies
             }
+        }
+        else if (pendingWaveSpawns.Count == 0)
+        {
+            AddWaves(4, Gamemode.Instance.GetDifficulty());
         }
     }
 }

@@ -410,6 +410,10 @@ PrefabInstance:
       propertyPath: BulletSpeed
       value: 1500
       objectReference: {fileID: 0}
+    - target: {fileID: 2755320782236196003, guid: 799ccc99c12f847d4a850c3dc78de73a, type: 3}
+      propertyPath: DPSPulseMultiplier
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 2873868946577324546, guid: 799ccc99c12f847d4a850c3dc78de73a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -2707,6 +2711,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3135456003051117745, guid: 7336bf9b0171ddf4ba301ede307359d6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5751609121998045288, guid: 7336bf9b0171ddf4ba301ede307359d6, type: 3}
+      propertyPath: pendingWaveSpawns.Array.size
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

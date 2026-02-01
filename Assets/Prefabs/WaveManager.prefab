@@ -46,20 +46,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7032e2e770698924ea62a17fa8d543a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
-  pendingWaveSpawns:
-  - wave: {fileID: 913842039053599278, guid: 4aeb69a9ec4a35d4bb72e280a0ce21a2, type: 3}
-    delay: 2
-  - wave: {fileID: 4468052325463023012, guid: 107c9cc2df12dff4fbadd1c91f3346ff, type: 3}
-    delay: 10
-  - wave: {fileID: 8031684945847391371, guid: 65e2bc7b34c685d478dd7bf0ea7b1f47, type: 3}
-    delay: 17
-  - wave: {fileID: 913842039053599278, guid: 4aeb69a9ec4a35d4bb72e280a0ce21a2, type: 3}
-    delay: 22
-  - wave: {fileID: 2673332943913136529, guid: be0b1f4b8302c28459668744eaeeaf71, type: 3}
-    delay: 27
+  pendingWaveSpawns: []
   maxSpawnLimit: {fileID: 1645826773784407311}
   minSpawnLimit: {fileID: 6566250581893812764}
   spawnParent: {fileID: 0}
+  spawnStraightPrefab: {fileID: 913842039053599278, guid: 4aeb69a9ec4a35d4bb72e280a0ce21a2, type: 3}
+  spawnCirc2Prefab: {fileID: 8031684945847391371, guid: 65e2bc7b34c685d478dd7bf0ea7b1f47, type: 3}
+  spawnWave3Prefab: {fileID: 2673332943913136529, guid: be0b1f4b8302c28459668744eaeeaf71, type: 3}
+  spawnSpreadWavePrefab: {fileID: 4468052325463023012, guid: 107c9cc2df12dff4fbadd1c91f3346ff, type: 3}
 --- !u!1 &1645826773784407311
 GameObject:
   m_ObjectHideFlags: 0
@@ -116,7 +110,7 @@ Transform:
   m_GameObject: {fileID: 6566250581893812764}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1177.33, y: -160.1, z: 0}
+  m_LocalPosition: {x: 1177.33, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []

@@ -34,6 +34,7 @@ public class Gamemode : MonoBehaviour
             return;
         }
         Instance = this;
+        timeRemaining = gameDuration;
     }
 
     public float GetDifficulty()
@@ -56,7 +57,7 @@ public class Gamemode : MonoBehaviour
 
     public void StartGame()
     {
-        timeRemaining = gameDuration;
+       
         isGameActive = true;
         isTimerRunning = false;
         onGameStart?.Invoke();
