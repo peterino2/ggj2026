@@ -52,7 +52,7 @@ MonoBehaviour:
   spawnParent: {fileID: 0}
   spawnStraightPrefab: {fileID: 913842039053599278, guid: 4aeb69a9ec4a35d4bb72e280a0ce21a2, type: 3}
   spawnCirc2Prefab: {fileID: 8031684945847391371, guid: 65e2bc7b34c685d478dd7bf0ea7b1f47, type: 3}
-  spawnWave3Prefab: {fileID: 2673332943913136529, guid: be0b1f4b8302c28459668744eaeeaf71, type: 3}
+  spawnWave3Prefab: {fileID: -115622817395257833, guid: 3aa654d4842cd624bbd3e7b5d2a7c03d, type: 3}
   spawnSpreadWavePrefab: {fileID: 4468052325463023012, guid: 107c9cc2df12dff4fbadd1c91f3346ff, type: 3}
 --- !u!1 &1645826773784407311
 GameObject:

@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float circleRadius = 5;
     [SerializeField] private float waveAmp = 2;
     [SerializeField] private float arcAmp = 0.1f;
+    [SerializeField] EARushPlayer rushPlayerScript;
     private float velocityIncreaseMultiplier = 0.10f;
     private float hpIncrease = 30;
     [SerializeField] private movementType movementOption = movementType.Straight;
@@ -26,7 +27,8 @@ public class Enemy : MonoBehaviour
         CircularCW,
         CircularCCW,
         UpwardArc,
-        DownwardArc
+        DownwardArc,
+        Rush
     }
     void Start()
     {
@@ -38,30 +40,33 @@ public class Enemy : MonoBehaviour
     void Update() 
     {
         internalTimer += Time.deltaTime;
-
-        if (movementOption == movementType.Straight)
-        {
-            movementStraight();
+        if (rushPlayerScript == null) {
+            if (movementOption == movementType.Straight)
+            {
+                movementStraight();
+            }
+            else if (movementOption == movementType.Wave)
+            {
+                movementWave();
+            }
+            else if (movementOption == movementType.CircularCW)
+            {
+                movementCircularCW();
+            }
+            else if (movementOption == movementType.CircularCCW)
+            {
+                movementCircularCCW();
+            }
+            else if (movementOption == movementType.UpwardArc)
+            {
+                movementUpwardArc();
+            }
+            else if (movementOption == movementType.DownwardArc)
+            {
+                movementDownwardArc();
+            }
         }
-        else if (movementOption == movementType.Wave)
-        {
-            movementWave();
-        }
-        else if (movementOption == movementType.CircularCW)
-        {
-            movementCircularCW();
-        }
-        else if (movementOption == movementType.CircularCCW)
-        {
-            movementCircularCCW();
-        }
-        else if (movementOption == movementType.UpwardArc)
-        {
-            movementUpwardArc();
-        }
-        else if (movementOption == movementType.DownwardArc) {
-            movementDownwardArc();
-        }
+        
 
         transform.position = new Vector3(transform.position.x, transform.position.y, -5.0f);
         

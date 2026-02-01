@@ -75,7 +75,7 @@ public class WaveManager : MonoBehaviour
             pendingWaveSpawns.Add(ws2);
 
             WaveSpawn ws3 = new WaveSpawn();
-            ws3.wave = spawnStraightPrefab;
+            ws3.wave = spawnWave3Prefab;
             ws3.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws3);
 
