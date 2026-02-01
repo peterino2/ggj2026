@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float circleRadius = 5;
     [SerializeField] private float waveAmp = 2;
     [SerializeField] private float arcAmp = 0.1f;
+    private float velocityIncreaseMultiplier = 0.10f;
+    private float hpIncrease = 20;
     [SerializeField] private movementType movementOption = movementType.Straight;
     private float internalTimer = 0f;
     private Rigidbody2D.SlideMovement SlideMovement = new Rigidbody2D.SlideMovement();
@@ -29,13 +31,14 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
-        curHP +=  Gamemode.Instance.GetDifficulty() * 20;
-
+        curHP +=  Gamemode.Instance.GetDifficulty() * hpIncrease;
+        velocity += velocity *  Gamemode.Instance.GetDifficulty() * Mathf.Clamp(velocityIncreaseMultiplier, 0.1f, 2.5f);
     }
 
     void Update() 
     {
         internalTimer += Time.deltaTime;
+
         if (movementOption == movementType.Straight)
         {
             movementStraight();

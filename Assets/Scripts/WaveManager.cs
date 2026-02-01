@@ -58,7 +58,7 @@ public class WaveManager : MonoBehaviour
         ws.wave = spawnStraightPrefab;
         ws.delay = 2;
         pendingWaveSpawns.Add(ws);
-        AddWaves(4, diff);
+        AddWaves(3, diff);
         
     }
     private void AddWaves(int waves, float diff) {
@@ -66,22 +66,22 @@ public class WaveManager : MonoBehaviour
         {
             WaveSpawn ws = new WaveSpawn();
             ws.wave = spawnStraightPrefab;
-            ws.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            ws.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws);
             Debug.Log("diff is " + diff);
             WaveSpawn ws2 = new WaveSpawn();
             ws2.wave = spawnCirc2Prefab;
-            ws2.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            ws2.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws2);
 
             WaveSpawn ws3 = new WaveSpawn();
-            ws3.wave = spawnWave3Prefab;
-            ws3.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            ws3.wave = spawnStraightPrefab;
+            ws3.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws3);
 
             WaveSpawn ws4 = new WaveSpawn();
             ws4.wave = spawnSpreadWavePrefab;
-            ws4.delay = Mathf.Clamp(12 - diff, 5.0f, 12.0f);
+            ws4.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws4);
         }
     }
@@ -108,7 +108,7 @@ public class WaveManager : MonoBehaviour
         }
         else if (pendingWaveSpawns.Count == 0)
         {
-            AddWaves(4, Gamemode.Instance.GetDifficulty());
+            AddWaves(3, Gamemode.Instance.GetDifficulty());
         }
     }
 }

@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5743497074112667583, guid: bbfe565b24f9baa4586a92709ab0b539, type: 3}
       propertyPath: velocity
-      value: 100
+      value: 75
       objectReference: {fileID: 0}
     - target: {fileID: 5743497074112667583, guid: bbfe565b24f9baa4586a92709ab0b539, type: 3}
       propertyPath: movementOption

@@ -46,5 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::LineWave
   duration: 2
   enemy: {fileID: 848083981877292452, guid: 993dd97993939ab419030b623e006443, type: 3}
-  frequency: 1
+  frequency: 0.5
   diagonal: 0
