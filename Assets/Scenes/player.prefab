@@ -369,6 +369,7 @@ GameObject:
   - component: {fileID: 2755320782236196003}
   - component: {fileID: 7299766957351831032}
   - component: {fileID: 5268706918162571045}
+  - component: {fileID: 4012456313486264162}
   m_Layer: 5
   m_Name: player
   m_TagString: Player
@@ -547,6 +548,7 @@ MonoBehaviour:
   BaseFireRate: 0.25
   BulletSpeed: 300
   bulletSpawnPosition: {fileID: 8461097047022106704}
+  Damage: 10
 --- !u!114 &2755320782236196003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -562,6 +564,7 @@ MonoBehaviour:
   LaserBeamPrefab: {fileID: 4873622280124943654, guid: 689d529fdc6a73e4fbe57e8601727bb5, type: 3}
   PulseFireThreshold: 2
   PulsePowerPerSecond: 1
+  DPSPulseMultiplier: 1000
 --- !u!114 &7299766957351831032
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +598,36 @@ MonoBehaviour:
   TimeBetweenShots: 3
   PulsePowerPerMissile: 3
   InitialVelocity: 500
+  Damage: 50
+--- !u!114 &4012456313486264162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680778551671988746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbfcdd729497cef429381ac5f53dc9a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ScrapManager
+  ScrapXPAmounts:
+  - 1
+  - 3
+  - 8
+  - 13
+  - 34
+  - 89
+  - 233
+  - 610
+  - 1597
+  - 4181
+  - 10946
+  - 28657
+  ScrapPrefabs:
+  - {fileID: 8074615714495503796, guid: baf845bd89268a547b04498cc67f8485, type: 3}
+  - {fileID: 584772141033304540, guid: 649d9cd3c8d898f4387926f78fa0bd0e, type: 3}
+  - {fileID: 3950210403051382764, guid: 54da30a09641e7548b4eb5ce2deec9ca, type: 3}
 --- !u!1 &6975253063359618243
 GameObject:
   m_ObjectHideFlags: 0

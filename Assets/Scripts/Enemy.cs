@@ -127,6 +127,7 @@ public class Enemy : MonoBehaviour
             if (curHP <= 0)
             { 
                 XPBarSystem.GetInstance().AddXP(3);
+                ScrapManager.Get().SpawnScrap(transform.position, 3);
                 Destroy(gameObject);
             }
         }
@@ -147,6 +148,7 @@ public class Enemy : MonoBehaviour
             if (curHP <= 0)
             {
                 XPBarSystem.GetInstance().AddXP(3);
+                ScrapManager.Get().SpawnScrap(transform.position, 3);
                 Destroy(gameObject);
             }
         }

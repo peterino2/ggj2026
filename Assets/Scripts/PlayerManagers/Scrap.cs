@@ -17,6 +17,11 @@ public class Scrap : MonoBehaviour
 
     private Transform PlayerTransform;
 
+    public void SetXP(float xp)
+    {
+        XP = xp;
+    }
+
     public void SetCollectionRange(float Range)
     {
         CollectionRangeSquared = Range * Range;
@@ -70,7 +75,7 @@ public class Scrap : MonoBehaviour
         }
         else
         {
-            transform.position += Velocity *= Time.deltaTime;
+            transform.position += Velocity * Time.deltaTime;
         }
 
         if(IsCloseEnoughToPlayer())
