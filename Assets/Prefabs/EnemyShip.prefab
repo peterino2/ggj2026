@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   velocity: 100
-  maxHP: 300
-  curHP: 300
+  maxHP: 100
+  curHP: 100
   damage: 10
   circleRadius: 500
   waveAmp: 200

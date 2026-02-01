@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
-            SpriteController.gPlayer.takeDamage(35);
+            SpriteController.gPlayer.takeDamage(25);
             Destroy(gameObject);
         }
     }

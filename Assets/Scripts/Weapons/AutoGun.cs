@@ -23,7 +23,7 @@ public class AutoGun : WeaponBase
     [SerializeField] float BulletSpeed = 300.0f;
     [SerializeField] Transform bulletSpawnPosition;
 
-    [SerializeField] float Damage = 10.0f;
+    [SerializeField] float Damage = 15.0f;
 
     private float TimeSinceLastShot = 0.0f;
 
