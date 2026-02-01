@@ -320,8 +320,8 @@ MonoBehaviour:
   clippedRenderers: []
   rectTransform: {fileID: 0}
   currentState: 0
-  NodeName: 
-  Description: 
+  NodeName: Railgun
+  Description: Takes a lot of energy to charge, destroys enemies in a line
   rarity: 0
   PulseObject: {fileID: 0}
   PulsedirectionIndicator: {fileID: 9185755703397184633, guid: d3d0810688b904b9491222c59430c840, type: 3}

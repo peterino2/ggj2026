@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
 using UnityEditor.UI;
@@ -33,7 +34,7 @@ public class PowerNode : MonoBehaviour
     public SpriteRenderer selectionSprite;
     public SpriteRenderer dockedSprite;
     public Transform sceneParent;
-    public SpriteRenderer[] clippedRenderers;
+    public List<SpriteRenderer> clippedRenderers = new List<SpriteRenderer>();
     
 
     public RectTransform rectTransform;
@@ -58,7 +59,6 @@ public class PowerNode : MonoBehaviour
     public GameObject PulseObject;
     public GameObject PulsedirectionIndicator;
     public Vector2[] PulseDirections = new Vector2[] {};
-
     public RectTransform[] pulseIndicators = new RectTransform[] {};
     
     // common base stats
@@ -75,9 +75,18 @@ public class PowerNode : MonoBehaviour
         {
             mainCamera = Camera.main;
         }
+        
         anchorPosition = transform.position;
         noiseOffset = new Vector2(Random.Range(0f, 100f), Random.Range(0f, 100f));
         propertyBlock = new MaterialPropertyBlock();
+        
+        foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
+        {
+            if (clippedRenderers.Contains(sr))
+                continue;
+            
+            clippedRenderers.Add(sr);
+        }
         AwakeInner();
     }
 
@@ -114,10 +123,11 @@ public class PowerNode : MonoBehaviour
             float deg = (float) ((180.0 / Math.PI) * Math.Atan2(dir.y, dir.x));
             rt.rotation = Quaternion.Euler(0f, 0f, deg);
             
-            
             SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
-            ApplyClipRectSingle(Deckbuilder.GetInstance().gridBounds, sr);
+            clippedRenderers.Add(sr);
+            // ApplyClipRectSingle(Deckbuilder.GetInstance().gridBounds, sr);
         }
+
     }
 
     private void OnDestroy()
@@ -205,6 +215,8 @@ public class PowerNode : MonoBehaviour
         float noiseY = (Mathf.PerlinNoise(noiseOffset.y, time) - 0.5f) * 2f;
         totalForce += new Vector3(noiseX, noiseY, 0f) * floatAmplitude;
 
+        totalForce.x -= 100f;
+
         // Screen edge repulsion force
         totalForce += HandleEdgeForce();
 
@@ -291,6 +303,8 @@ public class PowerNode : MonoBehaviour
             }
         }
 
+        force.z = 0;
+
         return force;
     }
 
@@ -368,8 +382,6 @@ public class PowerNode : MonoBehaviour
 
     private void ApplyClipRect(RectTransform clipSource)
     {
-        if (clippedRenderers == null) return;
-        
         Vector3[] corners = new Vector3[4];
         clipSource.GetWorldCorners(corners);
         Vector4 clipRect = new Vector4(corners[0].x, corners[0].y, corners[2].x, corners[2].y);
