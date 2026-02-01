@@ -17,6 +17,8 @@ public class Gamemode : MonoBehaviour
     private float timeRemaining;
     private bool isGameActive = false;
     private bool isTimerRunning = false;
+    
+    public Transform FloatersCanvas;
 
     private void Awake()
     {
@@ -64,11 +66,16 @@ public class Gamemode : MonoBehaviour
         isTimerRunning = true;
         onTimerStart?.Invoke();
         
+        SpawnStarterWeapon();
+    }
+
+    private void SpawnStarterWeapon()
+    {
         LootSelectionUI lootUI = LootSelectionUI.Instance;
-        if (lootUI != null)
-        {
-            lootUI.ShowSelection(RollType.WeaponOnly);
-        }
+        if (lootUI == null || lootUI.lootSpawner == null) return;
+        
+        Vector3 spawnPos = lootUI.spawnPoint != null ? lootUI.spawnPoint.position : Vector3.zero;
+        lootUI.lootSpawner.Spawn("AutoGun", spawnPos);
     }
 
     private void Update()

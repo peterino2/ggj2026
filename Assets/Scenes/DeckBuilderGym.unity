@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Gamemode
   gameDuration: 600
   timerText: {fileID: 16126935}
-  starterNodeArchetype: Basic Generator
+  starterNodeArchetype: Space Generator
   onGameStart:
     m_PersistentCalls:
       m_Calls: []

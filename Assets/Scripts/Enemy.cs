@@ -58,6 +58,9 @@ public class Enemy : MonoBehaviour
         else if (movementOption == movementType.DownwardArc) {
             movementDownwardArc();
         }
+
+        transform.position = new Vector3(transform.position.x, transform.position.y, -5.0f);
+        
         if (isOutOfBounds())
         {
             Destroy(gameObject);

@@ -37,6 +37,8 @@ public class WaveManager : MonoBehaviour
     private SpawnRange spawnRange;
     private float time;
 
+    public Transform spawnParent;
+
     private void Start()
     {
         if (maxSpawnLimit != null && minSpawnLimit != null)

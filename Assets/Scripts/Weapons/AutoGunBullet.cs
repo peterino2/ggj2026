@@ -49,7 +49,7 @@ public class AutoGunBullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Enemy")) {
-            Owner.Release(this);
+            // Owner.Release(this);
             gameObject.transform.position = Vector3.zero;
             gameObject.SetActive(false);
         }

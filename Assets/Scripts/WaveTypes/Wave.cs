@@ -1,10 +1,19 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Wave : MonoBehaviour
 {
     public float duration = 0; // How long this wave last. Default is just 1 frame
     public GameObject enemy; // Enemy to spawn
     public SpawnRange spawnRange;
+    
+    private Gamemode gamemode;
+
+    private void Start()
+    {
+        gamemode = Gamemode.Instance;
+    }
 
     public virtual void Update()
     {
