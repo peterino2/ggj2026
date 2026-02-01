@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("PlayerBullet"))
         {
             //takeDamage
-            curHP -= 10;
+            curHP -= other.GetComponent<BulletBase>().GetDamage();
             AudioPlayer.Instance.Play(SoundType.Hit);
             if (curHP <= 0)
             { 
@@ -142,7 +142,7 @@ public class Enemy : MonoBehaviour
         if(other.CompareTag("PlayerLaser"))
         {
             //takeDamage
-            curHP -= 10000.0f * Time.deltaTime;
+            curHP -= other.GetComponent<BulletBase>().GetDamage() * Time.deltaTime;
             AudioPlayer.Instance.Play(SoundType.Hit);
             if (curHP <= 0)
             {
