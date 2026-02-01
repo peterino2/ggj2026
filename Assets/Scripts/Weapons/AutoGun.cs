@@ -96,6 +96,7 @@ public class AutoGun : WeaponBase
                 Vector3 Velocity = new Vector3(Mathf.Cos(Angle), Mathf.Sin(Angle), 0.0f);
                 Velocity *= BulletSpeed;
 
+                AudioPlayer.Instance.Play(SoundType.AutoGun);
                 FireBullet(Velocity);
             }
 
