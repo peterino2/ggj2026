@@ -64,6 +64,18 @@ public class XPBarSystem : MonoBehaviour
         }
 
         Level += 1.0f;
+        if (Level >= 2.0f)
+        {
+            SpriteController.gPlayer.Mask1.enabled = true;
+        }
+        if (Level >= 5.0f)
+        {
+            SpriteController.gPlayer.Mask2.enabled = true;
+        }
+        if (Level >= 10.0f)
+        {
+            SpriteController.gPlayer.Mask3.enabled = true;
+        }
     }
 
     public void AddXP(float amount)

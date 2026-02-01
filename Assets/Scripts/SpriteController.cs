@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// Basic 2D player controller with WASD movement.
@@ -18,6 +19,10 @@ public class SpriteController : MonoBehaviour
     private Vector2 moveInput;
     
     public static SpriteController gPlayer;
+
+    public Image Mask1;
+    public Image Mask2;
+    public Image Mask3;
 
     public void takeDamage(float damage)
     {
@@ -44,6 +49,9 @@ public class SpriteController : MonoBehaviour
     private void Awake()
     {
         gPlayer = this;
+        Mask1.enabled = false;
+        Mask2.enabled = false;
+        Mask3.enabled = false;
     }
 
     private void Start()

@@ -141,7 +141,7 @@ public class Enemy : MonoBehaviour
         if(other.CompareTag("PlayerLaser"))
         {
             //takeDamage
-            curHP -= 10.0f * Time.deltaTime;
+            curHP -= 10000.0f * Time.deltaTime;
             AudioPlayer.Instance.Play(SoundType.Hit);
             if (curHP <= 0)
             {
