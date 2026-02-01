@@ -30,6 +30,11 @@ public class Gamemode : MonoBehaviour
         Instance = this;
     }
 
+    public float GetDifficulty()
+    {
+        return 1.0f + (gameDuration - timeRemaining) / 60.0f;
+    }
+
     private void Start()
     {
         StartGame();

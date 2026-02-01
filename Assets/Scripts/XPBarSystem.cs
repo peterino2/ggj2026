@@ -1,3 +1,5 @@
+using System;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +14,20 @@ public class XPBarSystem : MonoBehaviour
     
     private float currentXP = 0f;
     private bool isPaused = false;
+
+    public float Level = 1.0f;
+
+    static private XPBarSystem Instance;
+
+    static public XPBarSystem GetInstance()
+    {
+        return Instance;
+    }
+
+    public void Awake()
+    {
+        Instance = this;
+    }
 
     private void Update()
     {
@@ -46,6 +62,8 @@ public class XPBarSystem : MonoBehaviour
         {
             lootUI.ShowSelection(defaultRollType);
         }
+
+        Level += 1.0f;
     }
 
     public void AddXP(float amount)
