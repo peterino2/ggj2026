@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections.Generic;
+using DefaultNamespace;
 
 public class Deckbuilder : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Deckbuilder : MonoBehaviour
     // to use me 
     // do Deckbuilder.GetInstance().GraphUpdates += this.graphUpdate
     public delegate void GraphUpdate(Deckbuilder deckbuilder);
+    
+    private MaterialPropertyBlock propertyBlock;
+    private static readonly int ClipRectID = Shader.PropertyToID("_ClipRect");
 
     public GraphUpdate GraphUpdates;
 
@@ -25,6 +29,7 @@ public class Deckbuilder : MonoBehaviour
 
     private List<PowerNode> floatingNodes = new List<PowerNode>();
     private List<PowerNode> dragCandidates = new List<PowerNode>();
+    public List<PowerNode> dockedNodes = new List<PowerNode>();
     private PowerNode currentlyDragging;
 
     public bool hasHover = false;
@@ -32,6 +37,17 @@ public class Deckbuilder : MonoBehaviour
     public static Deckbuilder GetInstance()
     {
         return gDeckBuilder;
+    }
+    
+    public void RegisterDockedNode(PowerNode node)
+    {
+        if (!dockedNodes.Contains(node))
+            dockedNodes.Add(node);
+    }
+
+    public void UnregisterDockedNode(PowerNode node)
+    {
+        dockedNodes.Remove(node);
     }
 
     public void RegisterFloatingNode(PowerNode node)
@@ -66,6 +82,8 @@ public class Deckbuilder : MonoBehaviour
     {
         gDeckBuilder = this;
         _graphRootPosition = graphRoot.position;
+        
+        propertyBlock = new MaterialPropertyBlock();
         
         // mlg pro tip for prototyping 2d games, makes physics and custom visual effects
         // mega consistent.
@@ -150,6 +168,29 @@ public class Deckbuilder : MonoBehaviour
         dragCandidates.Clear();
 
         graphRoot.position = _graphRootPosition + _graphOffsetPosition;
+    }
+    
+    public GameObject pulsePrefab;
+
+    public void SpawnPulse(PowerNode node, Vector2 direction, float pulsePower)
+    {
+        GameObject go = Instantiate(pulsePrefab, node.transform.position, Quaternion.identity, graphRoot.transform);
+        PowerPulse pulse = go.GetComponent<PowerPulse>();
+        pulse.pulsePower = pulsePower;
+        pulse.instigator = node;
+        pulse.dir = direction;
+        // pulse. = node.transform.position;
+        pulse.pulsepos = new Vector2(node.transform.position.x,  node.transform.position.y);
+        
+        
+        Vector3[] corners = new Vector3[4];
+        graphRoot.GetWorldCorners(corners);
+        Vector4 clipRect = new Vector4(corners[0].x, corners[0].y, corners[2].x, corners[2].y);
+        
+        var sr = go.GetComponent<SpriteRenderer>();
+        sr.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetVector(ClipRectID, clipRect);
+        sr.SetPropertyBlock(propertyBlock);
     }
     
     // Graph operations

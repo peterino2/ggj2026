@@ -17,6 +17,7 @@ public class DeckBuilderInspector : MonoBehaviour
     public Material rareMaterial;
     public Material legendMaterial;
 
+
     private PowerNode currentHoveredNode;
 
     private void Awake()
@@ -113,14 +114,14 @@ public class DeckBuilderInspector : MonoBehaviour
 
             if (node.rarity == PowerNode.Rarity.Rare)
             {
-                nameText.text = node.NodeName + "(Rare)";
+                nameText.text = node.NodeName + " (Rare)";
                 nameText.color = rareColor;
                 nameText.material = rareMaterial;
             }
 
             if (node.rarity == PowerNode.Rarity.Legendary)
             {
-                nameText.text = node.NodeName + "(Legendary)";
+                nameText.text = node.NodeName + " (Legendary)";
                 nameText.color = legendColor;
                 nameText.material = legendMaterial;
             }
@@ -133,7 +134,7 @@ public class DeckBuilderInspector : MonoBehaviour
             repeatDelayText.text = $"Delay: {node.RepeatDelay:F1}s";
         
         if (repeatMultiplierText != null)
-            repeatMultiplierText.text = $"Power Factor: {node.RepeatMultiplier:F2}x";
+            repeatMultiplierText.text = $"Power Factor: {node.powerFactor:F2}x";
     }
 
     private void HideCard()
@@ -143,6 +144,7 @@ public class DeckBuilderInspector : MonoBehaviour
         
         currentHoveredNode = null;
     }
+
 
     private void PositionCard(Vector2 screenPos)
     {

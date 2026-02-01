@@ -1,4 +1,7 @@
 using System;
+using System.Linq;
+using DefaultNamespace;
+using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Random = UnityEngine.Random;
@@ -32,7 +35,7 @@ public class PowerNode : MonoBehaviour
     public SpriteRenderer[] clippedRenderers;
     
 
-    private RectTransform rectTransform;
+    public RectTransform rectTransform;
     public NodeState currentState = NodeState.Floating;
     private Vector3 targetWorldPosition;
     private Vector3 velocity;
@@ -50,13 +53,18 @@ public class PowerNode : MonoBehaviour
     public string NodeName;
     public string Description;
     public Rarity rarity = Rarity.Common; // 
-    public float RepeatDelay = 0.1f;
-    public float RepeatMultiplier = 0.1f;
 
+    public GameObject PulseObject;
     public GameObject PulsedirectionIndicator;
     public Vector2[] PulseDirections = new Vector2[] {};
 
     public RectTransform[] pulseIndicators = new RectTransform[] {};
+    
+    // common base stats
+    public float FireRate = 2.0f;  // for generators this translates to how often it generates a pulse
+    public float NodePower = 1.0f;
+    public float RepeatDelay = 0.1f;
+    public float powerFactor = 0.1f;
 
     private void Awake()
     {
@@ -91,6 +99,10 @@ public class PowerNode : MonoBehaviour
             rt.localScale = Vector3.one;
             float deg = (float) ((180.0 / Math.PI) * Math.Atan2(dir.y, dir.x));
             rt.rotation = Quaternion.Euler(0f, 0f, deg);
+            
+            
+            SpriteRenderer sr = go.GetComponentInChildren<SpriteRenderer>();
+            ApplyClipRectSingle(Deckbuilder.GetInstance().gridBounds, sr);
         }
     }
 
@@ -100,6 +112,11 @@ public class PowerNode : MonoBehaviour
     }
 
     private void Update()
+    {
+        UpdateInner();
+    }
+
+    public void UpdateInner()
     {
         if (Mouse.current == null) return;
 
@@ -160,6 +177,8 @@ public class PowerNode : MonoBehaviour
             selectionSprite.enabled = false;
             dockedSprite.enabled = true;
         }
+
+        TickNode();
     }
 
     private void HandleFloating()
@@ -305,6 +324,7 @@ public class PowerNode : MonoBehaviour
         Deckbuilder db = Deckbuilder.GetInstance();
         
         db.UnregisterFloatingNode(this);
+        db.RegisterDockedNode(this);
         transform.SetParent(db.graphRoot, true);
         currentState = NodeState.Docked;
         velocity = Vector3.zero;
@@ -315,10 +335,22 @@ public class PowerNode : MonoBehaviour
     private void UndockToScene()
     {
         Deckbuilder db = Deckbuilder.GetInstance();
-        db?.RegisterFloatingNode(this);
+        db.RegisterFloatingNode(this);
+        db.UnregisterDockedNode(this);
         transform.SetParent(sceneParent, true);
         
         ClearClipRect();
+    }
+
+    private void ApplyClipRectSingle(RectTransform clip, SpriteRenderer sr)
+    {
+        Vector3[] corners = new Vector3[4];
+        clip.GetWorldCorners(corners);
+        Vector4 clipRect = new Vector4(corners[0].x, corners[0].y, corners[2].x, corners[2].y);
+        
+        sr.GetPropertyBlock(propertyBlock);
+        propertyBlock.SetVector(ClipRectID, clipRect);
+        sr.SetPropertyBlock(propertyBlock);
     }
 
     private void ApplyClipRect(RectTransform clipSource)
@@ -372,7 +404,21 @@ public class PowerNode : MonoBehaviour
         transform.position += velocity * Time.deltaTime;
     }
 
-    public virtual void OnPulse()
+    public void GeneratePulse(Vector2 direction, float pulsePower)
+    {
+        Deckbuilder builder = Deckbuilder.GetInstance();
+        builder.SpawnPulse(this, direction, pulsePower);
+    }
+
+    public virtual void OnPulse(float pulseStrength)
+    {
+        foreach (var dir in PulseDirections)
+        {
+            GeneratePulse(dir, pulseStrength * powerFactor);
+        }
+    }
+
+    public virtual void TickNode()
     {
         
     }
