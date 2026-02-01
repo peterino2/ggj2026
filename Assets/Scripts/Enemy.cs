@@ -29,6 +29,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
+        curHP +=  Gamemode.Instance.GetDifficulty() * 20;
 
     }
 
@@ -89,6 +90,7 @@ public class Enemy : MonoBehaviour
     void movementCircularCCW()
     {
         transform.Translate(new Vector2(Mathf.Sin(Time.fixedTime) * -1, Mathf.Cos(Time.fixedTime)) * circleRadius * Time.deltaTime);
+        transform.Translate(Vector2.left * velocity * Time.deltaTime);
     }
 
     void movementUpwardArc()
@@ -125,6 +127,11 @@ public class Enemy : MonoBehaviour
                 XPBarSystem.GetInstance().AddXP(3);
                 Destroy(gameObject);
             }
+        }
+        else if (other.CompareTag("Player"))
+        {
+            //SpriteController.takeDamage(20);
+            Destroy(gameObject);
         }
     }
 }
