@@ -453,6 +453,9 @@ MonoBehaviour:
   moveSpeed: 600
   Health: 100
   rb: {fileID: 2726720563586504838}
+  Mask1: {fileID: 7261683237434880688}
+  Mask2: {fileID: 1498499150813003076}
+  Mask3: {fileID: 6694604718564419766}
 --- !u!50 &2726720563586504838
 Rigidbody2D:
   serializedVersion: 5

@@ -64,7 +64,7 @@ public class LootSelectionUI : MonoBehaviour
         {
             if (Keyboard.current.nKey.wasPressedThisFrame)
             {
-                ShowSelection(RollType.Default);
+                XPBarSystem.GetInstance().AddXP(100);
             }
             else if (Keyboard.current.kKey.wasPressedThisFrame)
             {

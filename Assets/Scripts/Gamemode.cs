@@ -118,7 +118,11 @@ public class Gamemode : MonoBehaviour
         
         int minutes = Mathf.FloorToInt(timeRemaining / 60f);
         int seconds = Mathf.FloorToInt(timeRemaining % 60f);
-        timerText.text = $"{minutes:00}:{seconds:00}";
+        
+        XPBarSystem xpBar = XPBarSystem.GetInstance();
+        int level = xpBar != null ? Mathf.FloorToInt(xpBar.Level) : 1;
+        
+        timerText.text = $"Lv.{level}  {minutes:00}:{seconds:00}";
     }
 
     private void EndGame()
