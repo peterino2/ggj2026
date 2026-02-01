@@ -120,4 +120,13 @@ public class SpriteController : MonoBehaviour
             rb.linearVelocity = moveInput.normalized * moveSpeed;
         }
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("EnemyBullet"))
+        {
+            AudioPlayer.Instance.Play(SoundType.Hit);
+            other.GetComponent<EnemyBullet>().OnPlayerHit();
+        }
+    }
 }
