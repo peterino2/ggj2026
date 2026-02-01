@@ -122,6 +122,7 @@ public class Enemy : MonoBehaviour
         {
             //takeDamage
             curHP -= 10;
+            AudioPlayer.Instance.Play(SoundType.Hit);
             if (curHP <= 0)
             { 
                 XPBarSystem.GetInstance().AddXP(3);

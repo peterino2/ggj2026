@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using System.Collections;
 using TMPro;
 
 public class Gamemode : MonoBehaviour
@@ -9,6 +12,9 @@ public class Gamemode : MonoBehaviour
     public float gameDuration = 600f; // 10 minutes
     public TextMeshProUGUI timerText;
     public string starterNodeArchetype = "Space Generator";
+    
+    public CanvasGroup gameOverPanel;
+    public float gameOverFadeDuration = 1f;
     
     public UnityEvent onGameStart;
     public UnityEvent onTimerStart;
@@ -37,6 +43,14 @@ public class Gamemode : MonoBehaviour
 
     private void Start()
     {
+        if (gameOverPanel != null)
+        {
+            gameOverPanel.alpha = 0f;
+            gameOverPanel.interactable = false;
+            gameOverPanel.blocksRaycasts = false;
+            gameOverPanel.gameObject.SetActive(false);
+        }
+        
         StartGame();
     }
 
@@ -136,5 +150,53 @@ public class Gamemode : MonoBehaviour
     public bool IsTimerRunning()
     {
         return isTimerRunning;
+    }
+
+    public void GameOver()
+    {
+        if (!isGameActive) return;
+        
+        isGameActive = false;
+        isTimerRunning = false;
+        StartCoroutine(ShowGameOverScreen());
+    }
+
+    private IEnumerator ShowGameOverScreen()
+    {
+        if (gameOverPanel == null) yield break;
+        
+        gameOverPanel.gameObject.SetActive(true);
+        gameOverPanel.interactable = false;
+        gameOverPanel.blocksRaycasts = true;
+        
+        float elapsed = 0f;
+        while (elapsed < gameOverFadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            gameOverPanel.alpha = Mathf.Lerp(0f, 1f, elapsed / gameOverFadeDuration);
+            yield return null;
+        }
+        
+        gameOverPanel.alpha = 1f;
+        gameOverPanel.interactable = true;
+        Time.timeScale = 0f;
+        canRestart = true;
+    }
+
+    private bool canRestart = false;
+
+    private void LateUpdate()
+    {
+        if (canRestart && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            RestartGame();
+        }
+    }
+
+    public void RestartGame()
+    {
+        canRestart = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
