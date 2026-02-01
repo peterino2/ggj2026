@@ -5,6 +5,8 @@ public class ScrapManager : MonoBehaviour
 {
     static ScrapManager _instance;
 
+    
+
     public static ScrapManager Get()
     {
         return _instance;
@@ -28,6 +30,13 @@ public class ScrapManager : MonoBehaviour
         NewScrap.SetOwner(ScrapPool);
 
         return NewScrap;
+    }
+
+    public void SpawnScrap(float Experience)
+    {
+
+
+        Scrap SpawnedScrap = ScrapPool.Get();
     }
 
     // Update is called once per frame
