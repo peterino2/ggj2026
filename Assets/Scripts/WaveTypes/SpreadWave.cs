@@ -3,14 +3,13 @@
 
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "NewWave", menuName = "Waves/Spread")]
 public class SpreadWave : Wave
 {
     public float frequency = 1; // In seconds. 0.1 means 10 enemies per second.
 
     private float spawnDelay = 0;
 
-    public override bool Update()
+    public override void Update()
     {
         spawnDelay -= Time.deltaTime;
         while (spawnDelay < 0)
@@ -18,7 +17,7 @@ public class SpreadWave : Wave
             spawnDelay += frequency;
             SpawnRandom();
         }
-        
-        return false;
+
+        base.Update();
     }
 }

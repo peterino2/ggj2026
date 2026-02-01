@@ -4,22 +4,23 @@ using UnityEngine;
 
 public class CameraBox : MonoBehaviour
 {
-    private Camera cam;
+    public Camera cam;
     private BoxCollider2D camBox;
-    private float sizex, sizey, ratio;
+    [SerializeField] private float sizex, sizey, ratio;
 
     void Start()
     { 
         cam = GetComponent<Camera>();
         camBox = GetComponent<BoxCollider2D>();
+         sizey = cam.orthographicSize * 2;
+        ratio = (float)Screen.width / (float)Screen.height;
+        sizex =  sizey * ratio;
+        camBox.size = new Vector2(sizex, sizey);
     }
 
     void Update()
     {
-        sizey = cam.orthographicSize * 2;
-        ratio = (Screen.width / (float)Screen.height);
-        sizex =  sizey * ratio;
-        camBox.size = new Vector2(sizex, sizey);
+       
     }
 
 }

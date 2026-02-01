@@ -6,6 +6,6 @@ public class EvilCircle : MonoBehaviour
 
     public void Update()
     {
-        transform.position += Vector3.left * speed * Time.deltaTime;
+        transform.position = transform.position + Vector3.left * speed * Time.deltaTime;
     }
 }

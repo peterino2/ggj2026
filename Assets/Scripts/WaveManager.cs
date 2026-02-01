@@ -13,14 +13,37 @@ public struct WaveSpawn
     public float delay; // Time delay between the previous spawn (Keyframe) and this one. We dont put absolute time here because we might tweak/add/remove waves and we want everything following to naturally "shift".
 }
 
+public struct SpawnRange
+{
+    public float min, max;
+    public float x;
+
+    public SpawnRange(float _min, float _max, float _x)
+    {
+        min = _min;
+        max = _max;
+        x = _x;
+    }
+}
+
 
 // Manager script that runs the waves and spawn the enemies
 public class WaveManager : MonoBehaviour
 {
     public List<WaveSpawn> pendingWaveSpawns = new List<WaveSpawn>();
+    public GameObject maxSpawnLimit;
+    public GameObject minSpawnLimit;
 
-    private List<Wave> activeWaves = new List<Wave>();
+    private SpawnRange spawnRange;
     private float time;
+
+    private void Start()
+    {
+        if (maxSpawnLimit != null && minSpawnLimit != null)
+        {
+            spawnRange = new SpawnRange(minSpawnLimit.transform.position.y, maxSpawnLimit.transform.position.y, minSpawnLimit.transform.position.x);
+        }
+    }
 
     private void Update()
     {
@@ -32,19 +55,14 @@ public class WaveManager : MonoBehaviour
             if (nextWaveSpawn.delay <= 0)
             {
                 pendingWaveSpawns.RemoveAt(0);
-                activeWaves.Add(nextWaveSpawn.wave);
-            }
-        }
 
-        // Update active waves
-        for (int i = 0; i < activeWaves.Count; ++i)
-        {
-            Wave wave = activeWaves[i];
-            wave.duration -= Time.deltaTime;
-            if (wave.Update() || wave.duration < 0)
+                // Once a wave is activated, its just a GameObject that exists until it has spewed everyone.
+                Wave wave = GameObject.Instantiate(nextWaveSpawn.wave, Vector3.zero, Quaternion.identity);
+                wave.spawnRange = spawnRange;
+            }
+            else
             {
-                activeWaves.RemoveAt(i);
-                --i;
+                pendingWaveSpawns[0] = nextWaveSpawn; // Ya I'm C# rusty... Structs are all by copies
             }
         }
     }
