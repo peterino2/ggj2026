@@ -2,7 +2,7 @@
     "archetypes": [
         {
             "name": "Space Generator",
-            "description": "Press SPACE to generate power pulses",
+            "description": "Press SPACE to generate power pulses, The face of moloch has many capabilities, they all require power.",
             "iconKey": "Generator",
             "effectType": "SpaceGeneratorEffect",
             "rarity": "Common",
@@ -26,7 +26,7 @@
         },
         {
             "name": "Angled Generator",
-            "description": "Outputs power at an upward angle",
+            "description": "Outputs power at an angle",
             "iconKey": "Generator",
             "effectType": "GeneratorEffect",
             "rarity": "Common",
@@ -50,7 +50,7 @@
         },
         {
             "name": "Railgun Module",
-            "description": "Powers the ship's railgun",
+            "description": "Takes multiple pulses of power to fire a big shot",
             "iconKey": "Railgun",
             "effectType": "RailgunEffect",
             "rarity": "Common",
@@ -62,7 +62,7 @@
         },
         {
             "name": "Railgun Module (Up)",
-            "description": "Powers the ship's railgun with upward output",
+            "description": "Takes multiple pulses of power to fire a big shot",
             "iconKey": "Railgun",
             "effectType": "RailgunEffect",
             "rarity": "Rare",
@@ -74,7 +74,7 @@
         },
         {
             "name": "Railgun Module (Down)",
-            "description": "Powers the ship's railgun with downward output",
+            "description": "Takes multiple pulses of power to fire a big shot",
             "iconKey": "Railgun",
             "effectType": "RailgunEffect",
             "rarity": "Rare",
@@ -170,7 +170,7 @@
         },
         {
             "name": "Laser Module",
-            "description": "Powers the ship's laser beam",
+            "description": "Each pulse adds duration and size to a laser",
             "iconKey": "Blast",
             "effectType": "LaserBeamEffect",
             "rarity": "Rare",
@@ -277,8 +277,20 @@
             "pulseDirections": [{ "x": 1, "y": 1 }]
         },
         {
+            "name": "Repair Module (Up)",
+            "description": "Triggers the face of Moloch's repairing capacity. consumes a lot of power",
+            "iconKey": "Repair",
+            "effectType": "RepairEffect",
+            "rarity": "Rare",
+            "tags": ["healing"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.0, "max": 1.0 },
+            "powerFactor": { "min": 0.5, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
             "name": "Repair Module",
-            "description": "Repairs the ship when powered",
+            "description": "Triggers the face of Moloch's repairing capacity. consumes a lot of power",
             "iconKey": "Repair",
             "effectType": "RepairEffect",
             "rarity": "Rare",
@@ -301,8 +313,8 @@
             "pulseDirections": [{ "x": 1, "y": 1 }, { "x": 1, "y": 0 }, { "x": 1, "y": -1 }]
         },
         {
-            "name": "Feedback Splitter",
-            "description": "This can send power backwards... use with care...",
+            "name": "Quantum Inverse Splitter",
+            "description": "This is the only node that can send power backwards... use with care...",
             "iconKey": "Splitter",
             "effectType": "",
             "rarity": "Legendary",
@@ -314,7 +326,7 @@
         },
         {
             "name": "Missile Pod",
-            "description": "Fires a barrage of missiles when powered",
+            "description": "The puny humans have missles, this will make a fine addition to the face of Moloch's arsenal",
             "iconKey": "Missile",
             "effectType": "MissileEffect",
             "rarity": "Common",
@@ -326,7 +338,7 @@
         },
         {
             "name": "Heavy Missile Bay",
-            "description": "Launches powerful missiles with high damage",
+            "description": "Charges the missles faster",
             "iconKey": "Missile",
             "effectType": "MissileEffect",
             "rarity": "Rare",
@@ -362,37 +374,37 @@
         },
         {
             "name": "Swarm Launcher",
-            "description": "Legendary launcher that unleashes a devastating swarm",
+            "description": "Supercharge your missles with incredible amounts of power",
             "iconKey": "Missile",
             "effectType": "MissileEffect",
             "rarity": "Legendary",
             "tags": ["weapon"],
             "fireRate": { "min": 1.0, "max": 1.0 },
-            "nodePower": { "min": 2.5, "max": 3.0 },
+            "nodePower": { "min": 25.0, "max": 30.0 },
             "powerFactor": { "min": 0.6, "max": 0.6 },
             "pulseDirections": [{ "x": 1, "y": 0 }]
         },
         {
             "name": "Swarm Launcher (Up)",
-            "description": "Devastating swarm with upward output",
+            "description": "Supercharge your missles with incredible amounts of power",
             "iconKey": "Missile",
             "effectType": "MissileEffect",
             "rarity": "Legendary",
             "tags": ["weapon"],
             "fireRate": { "min": 1.0, "max": 1.0 },
-            "nodePower": { "min": 2.5, "max": 3.0 },
+            "nodePower": { "min": 25.0, "max": 30.0 },
             "powerFactor": { "min": 0.6, "max": 0.6 },
             "pulseDirections": [{ "x": 1, "y": 1 }]
         },
         {
             "name": "Swarm Launcher (Down)",
-            "description": "Devastating swarm with downward output",
+            "description": "Supercharge your missles with incredible amounts of power",
             "iconKey": "Missile",
             "effectType": "MissileEffect",
             "rarity": "Legendary",
             "tags": ["weapon"],
             "fireRate": { "min": 1.0, "max": 1.0 },
-            "nodePower": { "min": 2.5, "max": 3.0 },
+            "nodePower": { "min": 25.0, "max": 30.0 },
             "powerFactor": { "min": 0.6, "max": 0.6 },
             "pulseDirections": [{ "x": 1, "y": -1 }]
         }
