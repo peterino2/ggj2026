@@ -100,6 +100,7 @@ public class AutoGun : WeaponBase
 
                 AudioPlayer.Instance.Play(SoundType.AutoGun);
                 FireBullet(Velocity);
+                CurrentPulsePower -= ShotsPerShot * 0.5f;
             }
 
             TimeSinceLastShot = 0.0f;
