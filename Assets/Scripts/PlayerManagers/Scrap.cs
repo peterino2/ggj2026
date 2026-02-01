@@ -3,7 +3,7 @@ using UnityEngine.Pool;
 
 public class Scrap : MonoBehaviour
 {
-    private float BaseMagnetizeSpeed = 500.0f;
+    private float BaseMagnetizeSpeed = 750.0f;
 
     private float CollectionRangeSquared = 1.0f;
 

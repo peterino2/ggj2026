@@ -34,6 +34,11 @@ public class ScrapManager : MonoBehaviour
         ActiveScrap = new HashSet<Scrap>();
     }
 
+    public HashSet<Scrap> GetActiveScrap()
+    {
+        return ActiveScrap;
+    }
+
     private void ScrapOnRelease(Scrap scrap)
     {
         ActiveScrap.Remove(scrap);
