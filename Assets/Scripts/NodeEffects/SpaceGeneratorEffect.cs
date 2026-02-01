@@ -22,7 +22,7 @@ namespace DefaultNamespace.NodeEffects
                 }
             }
 
-            if (canFire && Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (canFire && Keyboard.current != null && Keyboard.current.spaceKey.isPressed)
             {
                 canFire = false;
                 timeToFire = 1.0f / parentNode.FireRate;
