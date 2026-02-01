@@ -54,7 +54,7 @@ public class AutoGun : WeaponBase
         TimeSinceLastShot += Time.deltaTime;
 
         //TEMP TESTING ONLY
-        CurrentPulsePower += Time.deltaTime;
+        // CurrentPulsePower += Time.deltaTime;
 
         float NumQueuedBullets = CurrentPulsePower / PulsePerBullet;
 
@@ -102,6 +102,7 @@ public class AutoGun : WeaponBase
 
     public override void ApplyPulse(float PulsePower)
     {
+        Debug.Log("Autogun pulsed " + PulsePower);
         base.ApplyPulse(PulsePower);
 
         CurrentPulsePower += PulsePower;

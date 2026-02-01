@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,6 +15,18 @@ public class SpriteController : MonoBehaviour
 
     public Rigidbody2D rb;
     private Vector2 moveInput;
+    
+    public static SpriteController gPlayer;
+
+    public static SpriteController GetPlayer()
+    {
+        return gPlayer;
+    }
+
+    private void Awake()
+    {
+        gPlayer = this;
+    }
 
     private void Start()
     {

@@ -76,6 +76,17 @@ public class PowerNode : MonoBehaviour
         anchorPosition = transform.position;
         noiseOffset = new Vector2(Random.Range(0f, 100f), Random.Range(0f, 100f));
         propertyBlock = new MaterialPropertyBlock();
+        AwakeInner();
+    }
+
+    public virtual void AwakeInner()
+    {
+        
+    }
+
+    public virtual void StartInner()
+    {
+        
     }
 
     private void Start()
@@ -86,6 +97,7 @@ public class PowerNode : MonoBehaviour
         UpdatePulseDirections();
         
         Deckbuilder.GetInstance()?.RegisterFloatingNode(this);
+        StartInner();
     }
     
     public void UpdatePulseDirections()

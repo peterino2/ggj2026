@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,8 +16,20 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rb;
     private Vector2 moveInput;
 
+    public List<WeaponBase> Weapons;
+
+    public static PlayerController gPlayer;
+
+    public static PlayerController GetPlayer()
+    {
+        return gPlayer;
+    }
+
     private void Start()
     {
+        Weapons.AddRange(GetComponents<WeaponBase>());
+        gPlayer = this;
+        
         rb = GetComponent<Rigidbody2D>();
 
         if (rb == null)

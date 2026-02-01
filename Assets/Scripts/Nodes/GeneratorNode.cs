@@ -23,7 +23,7 @@ namespace Nodes
                 if (TimeToFire <= 0.0f)
                 {
                     TimeToFire += 1.0f / FireRate;
-                    OnPulse(1.0f);
+                    OnPulse(NodePower);
                 }
             }
         }
