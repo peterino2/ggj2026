@@ -1682,6 +1682,22 @@ MonoBehaviour:
     volumeMax: 0.2
     pitchMin: 2
     pitchMax: 2.2
+  - soundType: 2
+    clip: {fileID: 8300000, guid: 829aa0956a88adb42943c5da7edec60c, type: 3}
+    maxVoices: 6
+    minInterval: 0.01
+    volumeMin: 0.1
+    volumeMax: 0.2
+    pitchMin: 1
+    pitchMax: 1.1
+  - soundType: 3
+    clip: {fileID: 8300000, guid: a982af95be121f646b8464ab34bc0375, type: 3}
+    maxVoices: 6
+    minInterval: 0.01
+    volumeMin: 0.1
+    volumeMax: 0.2
+    pitchMin: 1
+    pitchMax: 1.1
 --- !u!4 &1325068673
 Transform:
   m_ObjectHideFlags: 0
