@@ -8,7 +8,7 @@ public class Gamemode : MonoBehaviour
     
     public float gameDuration = 600f; // 10 minutes
     public TextMeshProUGUI timerText;
-    public string starterNodeArchetype = "Basic Generator";
+    public string starterNodeArchetype = "Space Generator";
     
     public UnityEvent onGameStart;
     public UnityEvent onTimerStart;

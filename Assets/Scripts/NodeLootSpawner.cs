@@ -121,6 +121,7 @@ public class NodeLootSpawner : MonoBehaviour
         effectTypeMap["LaserBeamEffect"] = typeof(LaserBeamEffect);
         effectTypeMap["RepairEffect"] = typeof(RepairEffect);
         effectTypeMap["MissileEffect"] = typeof(MissileEffect);
+        effectTypeMap["SpaceGeneratorEffect"] = typeof(SpaceGeneratorEffect);
     }
 
     private void InitializeIconLookup()
@@ -209,27 +210,24 @@ public class NodeLootSpawner : MonoBehaviour
 
     private List<NodeArchetype> FilterByRollType(List<NodeArchetype> archetypes, RollType rollType)
     {
-        if (rollType == RollType.NoWeapon)
+        List<NodeArchetype> filtered = new List<NodeArchetype>();
+        
+        foreach (var a in archetypes)
         {
-            List<NodeArchetype> filtered = new List<NodeArchetype>();
-            foreach (var a in archetypes)
-            {
-                if (!HasTag(a, "weapon"))
-                    filtered.Add(a);
-            }
-            return filtered;
+            // Always exclude starter-only nodes from random rolls
+            if (HasTag(a, "starter"))
+                continue;
+            
+            if (rollType == RollType.NoWeapon && HasTag(a, "weapon"))
+                continue;
+            
+            if (rollType == RollType.WeaponOnly && !HasTag(a, "weapon"))
+                continue;
+            
+            filtered.Add(a);
         }
-        else if (rollType == RollType.WeaponOnly)
-        {
-            List<NodeArchetype> filtered = new List<NodeArchetype>();
-            foreach (var a in archetypes)
-            {
-                if (HasTag(a, "weapon"))
-                    filtered.Add(a);
-            }
-            return filtered;
-        }
-        return archetypes;
+        
+        return filtered;
     }
 
     public NodeArchetype PickRandomArchetype(RollType rollType)

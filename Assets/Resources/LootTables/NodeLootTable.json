@@ -1,6 +1,18 @@
 {
     "archetypes": [
         {
+            "name": "Space Generator",
+            "description": "Press SPACE to generate power pulses",
+            "iconKey": "Generator",
+            "effectType": "SpaceGeneratorEffect",
+            "rarity": "Common",
+            "tags": ["utility", "starter"],
+            "fireRate": { "min": 2.0, "max": 2.0 },
+            "nodePower": { "min": 1.0, "max": 1.0 },
+            "powerFactor": { "min": 1.0, "max": 1.0 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
             "name": "Basic Generator",
             "description": "Generates power pulses at a steady rate",
             "iconKey": "Generator",
