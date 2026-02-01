@@ -10,8 +10,8 @@ public class PowerNode : MonoBehaviour
 {
     public enum NodeState { Floating, Dragging, Docked }
 
-    public float springStrength = 15f;
-    public float damping = 0.75f;
+    public float springStrength = 85f;
+    public float damping = 0.9f;
     
 
     public float floatAmplitude = 0.1f;
@@ -21,8 +21,8 @@ public class PowerNode : MonoBehaviour
     public float edgeMargin = 0.5f;
     public float edgeForceStrength = 10f;
 
-    public float separationDistance = 1f;
-    public float separationForce = 5f;
+    public float separationDistance = 100f;
+    public float separationForce = 200f;
 
     public string nodeName;
     public string description;
@@ -264,9 +264,8 @@ public class PowerNode : MonoBehaviour
     private Vector3 HandleAntiFlockForce()
     {
         Vector3 force = Vector3.zero;
-        var nodes = Deckbuilder.GetInstance()?.GetFloatingNodes();
-        if (nodes == null) return force;
-
+        var nodes = Deckbuilder.GetInstance().GetFloatingNodes();
+        
         foreach (PowerNode other in nodes)
         {
             if (other == this) continue;
@@ -426,6 +425,7 @@ public class PowerNode : MonoBehaviour
 
     public virtual void OnPulse(float pulseStrength)
     {
+        Debug.Log("OnPulse: " + pulseStrength);
         if (pulseStrength < minPulsePower)
         {
             return;

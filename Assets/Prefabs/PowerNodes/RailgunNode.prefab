@@ -200,9 +200,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3541275422612007741}
   - component: {fileID: 7831677835455656824}
-  - component: {fileID: 1135572942629325077}
+  - component: {fileID: 2926117521597479974}
   m_Layer: 5
-  m_Name: AutoGun
+  m_Name: RailgunNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +288,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &1135572942629325077
+--- !u!114 &2926117521597479974
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,10 +297,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8526230607895442281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14b74c7cdff24248b940b19abe80a9ee, type: 3}
+  m_Script: {fileID: 11500000, guid: 4b84e3d113ea4c9a8ec0e35de0b42c81, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Nodes.AutoGunNode
-  springStrength: 80
+  m_EditorClassIdentifier: Assembly-CSharp::Nodes.RailGunNode
+  springStrength: 85
   damping: 0.9
   floatAmplitude: 0.1
   floatSpeed: 1
@@ -320,8 +320,8 @@ MonoBehaviour:
   clippedRenderers: []
   rectTransform: {fileID: 0}
   currentState: 0
-  NodeName: Autogun
-  Description: This node fires the autogun when set
+  NodeName: 
+  Description: 
   rarity: 0
   PulseObject: {fileID: 0}
   PulsedirectionIndicator: {fileID: 9185755703397184633, guid: d3d0810688b904b9491222c59430c840, type: 3}
@@ -330,5 +330,5 @@ MonoBehaviour:
   FireRate: 2
   NodePower: 1
   RepeatDelay: 0.1
-  powerFactor: 0.5
+  powerFactor: 0.1
   minPulsePower: 0.2

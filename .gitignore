@@ -111,3 +111,6 @@ UpgradeLog.htm
 *.vscode/
 .vscode/
 .vscode/**
+
+Assets/_Recovery/
+Assets/_Recovery.meta
