@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7091033702685412662}
   - component: {fileID: 5973157528765987587}
   m_Layer: 5
-  m_Name: Square (2)
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 469071944371106366}
   - component: {fileID: 4417456336516518869}
   m_Layer: 5
-  m_Name: Square (1)
+  m_Name: SelectionBorder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -200,9 +200,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3541275422612007741}
   - component: {fileID: 7831677835455656824}
-  - component: {fileID: 2926117521597479974}
+  - component: {fileID: -4679500484420363334}
+  - component: {fileID: 1741574656320764859}
   m_Layer: 5
-  m_Name: RailgunNode
+  m_Name: Laser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -278,7 +279,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: f69297beab49d16458d45d62e9e01001, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 09bc5e2ceefcb4293a02a7ab7e6a5587, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -288,7 +289,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
---- !u!114 &2926117521597479974
+--- !u!114 &-4679500484420363334
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -297,9 +298,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8526230607895442281}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b84e3d113ea4c9a8ec0e35de0b42c81, type: 3}
+  m_Script: {fileID: 11500000, guid: b7d5da34a7a3f1a4d866648d7c9f42da, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Nodes.RailGunNode
+  m_EditorClassIdentifier: Assembly-CSharp::PowerNode
   springStrength: 85
   damping: 0.9
   floatAmplitude: 0.1
@@ -317,18 +318,35 @@ MonoBehaviour:
   selectionSprite: {fileID: 4417456336516518869}
   dockedSprite: {fileID: 5973157528765987587}
   sceneParent: {fileID: 0}
-  clippedRenderers: []
+  clippedRenderers:
+  - {fileID: 7831677835455656824}
+  - {fileID: 4417456336516518869}
+  - {fileID: 5973157528765987587}
   rectTransform: {fileID: 0}
   currentState: 0
-  NodeName: Railgun
-  Description: Takes a lot of energy to charge, destroys enemies in a line
+  NodeName: Autogun
+  Description: This is a gun that has a thing.
   rarity: 0
   PulseObject: {fileID: 0}
   PulsedirectionIndicator: {fileID: 9185755703397184633, guid: d3d0810688b904b9491222c59430c840, type: 3}
-  PulseDirections: []
+  PulseDirections:
+  - {x: 1, y: 1}
   pulseIndicators: []
   FireRate: 2
   NodePower: 1
   RepeatDelay: 0.1
-  powerFactor: 0.1
+  powerFactor: 0.5
   minPulsePower: 0.2
+  nodeEffect: {fileID: 0}
+--- !u!114 &1741574656320764859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526230607895442281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51aeab9a2fd92c749aff45690767931b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DefaultNamespace.NodeEffects.LaserBeamEffect

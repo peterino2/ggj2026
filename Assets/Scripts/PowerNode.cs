@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DefaultNamespace;
+using DefaultNamespace.NodeEffects;
 using UnityEditor.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -68,12 +69,22 @@ public class PowerNode : MonoBehaviour
     public float powerFactor = 0.1f;
     public float minPulsePower = 0.2f;
 
+    public NodeEffect nodeEffect;
+
+    public SpriteRenderer NodeIcon;
+
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
         if (mainCamera == null)
         {
             mainCamera = Camera.main;
+        }
+
+        NodeIcon = GetComponent<SpriteRenderer>();
+        if (!clippedRenderers.Contains(NodeIcon))
+        {
+            clippedRenderers.Add(NodeIcon);
         }
         
         anchorPosition = transform.position;
@@ -87,6 +98,8 @@ public class PowerNode : MonoBehaviour
             
             clippedRenderers.Add(sr);
         }
+
+        nodeEffect = GetComponent<NodeEffect>();
         AwakeInner();
     }
 
@@ -108,6 +121,13 @@ public class PowerNode : MonoBehaviour
         UpdatePulseDirections();
         
         Deckbuilder.GetInstance()?.RegisterFloatingNode(this);
+        
+        if (nodeEffect != null)
+        {
+            nodeEffect.Initialize(this);
+            nodeEffect.StartEffect();
+        }
+        
         StartInner();
     }
     
@@ -138,6 +158,16 @@ public class PowerNode : MonoBehaviour
     private void Update()
     {
         UpdateInner();
+    }
+
+    private void LateUpdate()
+    {
+        Vector3 pos = transform.position;
+        if (pos.z != -20f)
+        {
+            pos.z = -20f;
+            transform.position = pos;
+        }
     }
 
     public void UpdateInner()
@@ -422,6 +452,7 @@ public class PowerNode : MonoBehaviour
 
     private void ApplySpringPhysics()
     {
+        targetWorldPosition.z = -20.0f;
         Vector3 displacement = targetWorldPosition - transform.position;
         Vector3 springForce = displacement * springStrength;
         velocity += springForce * Time.deltaTime;
@@ -438,19 +469,28 @@ public class PowerNode : MonoBehaviour
     public virtual void OnPulse(float pulseStrength)
     {
         Debug.Log("OnPulse: " + pulseStrength);
-        if (pulseStrength < minPulsePower)
+        
+        if (nodeEffect != null)
         {
-            return;
+            nodeEffect.OnPulse(pulseStrength);
         }
-            
-        foreach (var dir in PulseDirections)
+        else
         {
-            GeneratePulse(dir, pulseStrength * powerFactor);
+            if (pulseStrength < minPulsePower)
+                return;
+            
+            foreach (var dir in PulseDirections)
+            {
+                GeneratePulse(dir, pulseStrength * powerFactor);
+            }
         }
     }
 
     public virtual void TickNode()
     {
-        
+        if (nodeEffect != null)
+        {
+            nodeEffect.TickEffect();
+        }
     }
 }

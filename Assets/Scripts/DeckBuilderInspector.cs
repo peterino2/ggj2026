@@ -12,6 +12,8 @@ public class DeckBuilderInspector : MonoBehaviour
     public TextMeshProUGUI descriptionText;
     public TextMeshProUGUI repeatDelayText;
     public TextMeshProUGUI repeatMultiplierText;
+    public TextMeshProUGUI fireRateText;
+    public TextMeshProUGUI nodePowerText;
 
     public Material commonMaterial;
     public Material rareMaterial;
@@ -135,6 +137,12 @@ public class DeckBuilderInspector : MonoBehaviour
         
         if (repeatMultiplierText != null)
             repeatMultiplierText.text = $"Power Factor: {node.powerFactor:F2}x";
+        
+        if (fireRateText != null)
+            fireRateText.text = $"Fire Rate: {node.FireRate:F1}/s";
+        
+        if (nodePowerText != null)
+            nodePowerText.text = $"Power: {node.NodePower:F1}";
     }
 
     private void HideCard()
