@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecb5d993f3137724abadac0accff8ef3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LaserBeam
+  PowerDamageScale: 1000
 --- !u!222 &8086398084960406723
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -123,7 +124,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 900, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
