@@ -65,6 +65,11 @@ public class AutoGun : WeaponBase
 
         if (NumQueuedBullets > CriticalBulletPoint)
         {
+            if(TimeSinceLastShot < 4.0f / NumQueuedBullets)
+            {
+                return;
+            }
+
             float ShotsPerShot = NumQueuedBullets - CriticalBulletPoint;
 
             float Divisor = 4.0f;
@@ -74,7 +79,14 @@ public class AutoGun : WeaponBase
                 Divisor += 5.0f - ShotsPerShot;
             }
 
+            if(ShotsPerShot > 1.0f)
+            {
+                ShotsPerShot = Mathf.Sqrt(ShotsPerShot); 
+            }
+
             float AngleRange = Mathf.PI / Divisor;
+
+            ShotsPerShot = Mathf.Min(ShotsPerShot, 10.0f);
 
             for (float i = ShotsPerShot; i > 0.0f; i -= 1.0f)
             {
