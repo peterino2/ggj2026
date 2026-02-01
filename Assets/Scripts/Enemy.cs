@@ -84,13 +84,14 @@ public class Enemy : MonoBehaviour
     void movementCircularCW()
     {
         transform.Translate(new Vector2(Mathf.Sin(Time.fixedTime), Mathf.Cos(Time.fixedTime)) * -1 * circleRadius * Time.deltaTime);
+        transform.Translate(Vector2.left * 0.5f * velocity * Time.deltaTime);
     }
 
     //rotates counter clockwise from 3
     void movementCircularCCW()
     {
         transform.Translate(new Vector2(Mathf.Sin(Time.fixedTime) * -1, Mathf.Cos(Time.fixedTime)) * circleRadius * Time.deltaTime);
-        transform.Translate(Vector2.left * velocity * Time.deltaTime);
+        transform.Translate(Vector2.left * 0.5f * velocity * Time.deltaTime);
     }
 
     void movementUpwardArc()

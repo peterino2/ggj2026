@@ -13,6 +13,18 @@ PrefabInstance:
       value: EnemyShipCircCCW
       objectReference: {fileID: 0}
     - target: {fileID: 5743497074112667583, guid: bbfe565b24f9baa4586a92709ab0b539, type: 3}
+      propertyPath: curHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743497074112667583, guid: bbfe565b24f9baa4586a92709ab0b539, type: 3}
+      propertyPath: maxHP
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743497074112667583, guid: bbfe565b24f9baa4586a92709ab0b539, type: 3}
+      propertyPath: velocity
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5743497074112667583, guid: bbfe565b24f9baa4586a92709ab0b539, type: 3}
       propertyPath: movementOption
       value: 3
       objectReference: {fileID: 0}
