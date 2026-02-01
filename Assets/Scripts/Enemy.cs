@@ -135,5 +135,20 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnTriggerStay2D(Collider2D other)
+    {
+        if(other.CompareTag("PlayerLaser"))
+        {
+            //takeDamage
+            curHP -= 10.0f * Time.deltaTime;
+            AudioPlayer.Instance.Play(SoundType.Hit);
+            if (curHP <= 0)
+            {
+                XPBarSystem.GetInstance().AddXP(3);
+                Destroy(gameObject);
+            }
+        }
+    }
 }
 
