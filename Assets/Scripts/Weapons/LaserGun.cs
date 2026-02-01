@@ -35,7 +35,7 @@ public class LaserGun : WeaponBase
     void Update()
     {
         // TEST CODE REMOVE
-        CurPulsePower += Time.deltaTime * PulsePowerPerSecond * 7.5f;
+        // CurPulsePower += Time.deltaTime * PulsePowerPerSecond * 7.5f;
 
         if(Firing)
         {

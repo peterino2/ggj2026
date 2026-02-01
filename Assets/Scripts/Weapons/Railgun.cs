@@ -32,7 +32,7 @@ public class Railgun : WeaponBase
         TimeSinceLastShot += Time.deltaTime;
 
         // TEMP TEST CODE
-        CurPulsePower += Time.deltaTime * 20.0f;
+        // CurPulsePower += Time.deltaTime * 20.0f;
 
         if(TimeSinceLastShot >= ShotCooldown)
         {

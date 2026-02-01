@@ -216,6 +216,8 @@ GameObject:
   - component: {fileID: 2726720563586504838}
   - component: {fileID: 1700946874046598505}
   - component: {fileID: 2205775205605134369}
+  - component: {fileID: 2755320782236196003}
+  - component: {fileID: 7299766957351831032}
   m_Layer: 5
   m_Name: player
   m_TagString: Player
@@ -385,3 +387,35 @@ MonoBehaviour:
   PulsePerBullet: 0.3
   BaseFireRate: 0.25
   BulletSpeed: 300
+--- !u!114 &2755320782236196003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680778551671988746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b3d57d7ce25b641a5882e03602f7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LaserGun
+  LaserBeamPrefab: {fileID: 4873622280124943654, guid: 689d529fdc6a73e4fbe57e8601727bb5, type: 3}
+  PulseFireThreshold: 2
+  PulsePowerPerSecond: 1
+--- !u!114 &7299766957351831032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680778551671988746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc45c038881c9b54ab310126ec8639f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Railgun
+  BulletSpeed: 1250
+  RailgunPrefab: {fileID: 318061750704779038, guid: 7af9ad286af7a9e449b8d733ae3acfdf, type: 3}
+  ShotCooldown: 2
+  DamagePerPulsePower: 100
+  BaseMinPulsePowerPerShot: 5
