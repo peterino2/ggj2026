@@ -23,6 +23,8 @@ public class AutoGun : WeaponBase
     [SerializeField] float BulletSpeed = 300.0f;
     [SerializeField] Transform bulletSpawnPosition;
 
+    [SerializeField] float Damage = 10.0f;
+
     private float TimeSinceLastShot = 0.0f;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -45,7 +47,7 @@ public class AutoGun : WeaponBase
         Bullet.gameObject.transform.position = bulletSpawnPosition.position;
         Bullet.Velocity = Velocity;
         Bullet.gameObject.SetActive(true);
-
+        Bullet.Damage = Damage;
         CurrentPulsePower -= PulsePerBullet;
     }
 
