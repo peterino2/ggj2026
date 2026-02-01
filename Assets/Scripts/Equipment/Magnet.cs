@@ -6,7 +6,9 @@ public class Magnet : EquipmentBase
 
     public override void ApplyPulse(float pulsePower)
     {
-        float RangeSquared = RangePerPulsePower * RangePerPulsePower;
+        float RangeSquared = pulsePower * RangePerPulsePower;
+        RangeSquared = RangeSquared * RangeSquared;
+
         foreach(Scrap scrap in ScrapManager.Get().GetActiveScrap())
         {
             if(Vector3.SqrMagnitude(transform.position - scrap.transform.position) <= RangeSquared)

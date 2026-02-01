@@ -370,6 +370,7 @@ GameObject:
   - component: {fileID: 7299766957351831032}
   - component: {fileID: 5268706918162571045}
   - component: {fileID: 4012456313486264162}
+  - component: {fileID: 4054371939578691557}
   m_Layer: 5
   m_Name: player
   m_TagString: Player
@@ -631,6 +632,19 @@ MonoBehaviour:
   - {fileID: 8074615714495503796, guid: baf845bd89268a547b04498cc67f8485, type: 3}
   - {fileID: 584772141033304540, guid: 649d9cd3c8d898f4387926f78fa0bd0e, type: 3}
   - {fileID: 3950210403051382764, guid: 54da30a09641e7548b4eb5ce2deec9ca, type: 3}
+--- !u!114 &4054371939578691557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680778551671988746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f35b1a26d27dcf4684eb71351022f53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Magnet
+  RangePerPulsePower: 100
 --- !u!1 &6975253063359618243
 GameObject:
   m_ObjectHideFlags: 0
