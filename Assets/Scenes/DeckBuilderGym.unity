@@ -1086,7 +1086,7 @@ MonoBehaviour:
   dockedNodes: []
   hasHover: 0
   MouseDown: 0
-  pulsePrefab: {fileID: 0}
+  pulsePrefab: {fileID: 6464269682045363049, guid: 9246f3d351ee148578f0173492eaff4e, type: 3}
 --- !u!1 &3117175276983782256
 GameObject:
   m_ObjectHideFlags: 0
