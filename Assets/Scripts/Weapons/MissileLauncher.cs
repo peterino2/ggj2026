@@ -11,6 +11,8 @@ public class MissileLauncher : WeaponBase
 
     [SerializeField] float InitialVelocity = 500.0f;
 
+    [SerializeField] float Damage = 50.0f;
+
     private ObjectPool<Missile> MissilePool;
 
     private float CurPulsePower = 0.0f;
@@ -34,6 +36,8 @@ public class MissileLauncher : WeaponBase
     private void FireMissile(Vector3 Velocity)
     {
         Missile MissileToFire = MissilePool.Get();
+
+        MissileToFire.Damage = Damage;
         MissileToFire.SetVelocity(Velocity);
         MissileToFire.gameObject.transform.position = gameObject.transform.position;
         MissileToFire.gameObject.SetActive(true);

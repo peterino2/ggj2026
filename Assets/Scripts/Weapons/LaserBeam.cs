@@ -1,8 +1,15 @@
 using UnityEngine;
 
-public class LaserBeam : MonoBehaviour
+public class LaserBeam : BulletBase
 {
     float CurrentPower = 0.0f;
+
+    public float PowerDamageScale = 1000.0f;
+
+    public override float GetDamage()
+    {
+        return CurrentPower * PowerDamageScale;
+    }
 
     public void SetCurrentPower(float Power)
     {

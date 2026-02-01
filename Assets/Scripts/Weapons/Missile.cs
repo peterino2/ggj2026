@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class Missile : MonoBehaviour
+public class Missile : BulletBase
 {
     [SerializeField] float XAcceleration = 500.0f;
 
@@ -9,7 +9,14 @@ public class Missile : MonoBehaviour
 
     Vector3 Velocity;
 
+    public float Damage {  get; set; }
+
     ObjectPool<Missile> Owner;
+
+    public override float GetDamage()
+    {
+        return Damage;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

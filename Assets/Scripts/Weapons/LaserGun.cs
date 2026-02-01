@@ -8,6 +8,8 @@ public class LaserGun : WeaponBase
 
     [SerializeField] float PulsePowerPerSecond = 1.0f;
 
+    [SerializeField] float DPSPulseMultiplier = 1000.0f;
+
     LaserBeam Beam;
 
     float CurPulsePower = 0.0f;
@@ -60,6 +62,7 @@ public class LaserGun : WeaponBase
         if(Firing)
         {
             Beam.SetCurrentPower(CurPulsePower);
+            Beam.PowerDamageScale = DPSPulseMultiplier;
         }
     }
 }

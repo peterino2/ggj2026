@@ -2,11 +2,18 @@ using System;
 using UnityEngine;
 using UnityEngine.Pool;
 
-public class AutoGunBullet : MonoBehaviour
+public class AutoGunBullet : BulletBase
 {
     public Vector3 Velocity { get; set; }
 
+    public float Damage {  get; set; }
+
     private ObjectPool<AutoGunBullet> Owner;
+
+    public override float GetDamage()
+    {
+        return Damage;
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()

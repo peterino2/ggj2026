@@ -2,15 +2,8 @@ using UnityEngine;
 
 public class BulletBase : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public virtual float GetDamage()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        return 0.0f;
     }
 }

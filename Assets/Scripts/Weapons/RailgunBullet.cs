@@ -1,10 +1,15 @@
 using UnityEngine;
 
-public class RailgunBullet : MonoBehaviour
+public class RailgunBullet : BulletBase
 {
     public Vector3 Velocity { get; set; }
 
     public float Damage { get; set; }
+
+    public override float GetDamage()
+    {
+        return Damage;
+    }
 
     // Update is called once per frame
     void Update()
