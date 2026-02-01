@@ -18,6 +18,7 @@ public class PowerNode : MonoBehaviour
     public float floatAmplitude = 0.1f;
     public float floatSpeed = 1f;
     public float floatingDamping = 0.98f;
+    public float driftForce = 100f;
     
     public float edgeMargin = 0.5f;
     public float edgeForceStrength = 10f;
@@ -29,6 +30,8 @@ public class PowerNode : MonoBehaviour
     public string description;
     public float repeatDelay;
     public float repeatMultiplier = 1f;
+    
+    public bool isStarterNode = false;
 
     public Camera mainCamera;
     public SpriteRenderer selectionSprite;
@@ -234,6 +237,8 @@ public class PowerNode : MonoBehaviour
         TickNode();
     }
 
+    public float dragForce = 100.0f;
+
     private void HandleFloating()
     {
         Vector3 totalForce = Vector3.zero;
@@ -244,7 +249,7 @@ public class PowerNode : MonoBehaviour
         float noiseY = (Mathf.PerlinNoise(noiseOffset.y, time) - 0.5f) * 2f;
         totalForce += new Vector3(noiseX, noiseY, 0f) * floatAmplitude;
 
-        totalForce.x -= 100f;
+        totalForce.x -= dragForce;
 
         // Screen edge repulsion force
         totalForce += HandleEdgeForce();
@@ -386,6 +391,12 @@ public class PowerNode : MonoBehaviour
         velocity = Vector3.zero;
         
         ApplyClipRect(db.gridBounds);
+        
+        if (isStarterNode)
+        {
+            isStarterNode = false;
+            Gamemode.Instance?.OnStarterNodeDocked();
+        }
     }
 
     private void UndockToScene()

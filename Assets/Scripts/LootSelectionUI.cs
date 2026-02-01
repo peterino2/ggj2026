@@ -6,6 +6,8 @@ using TMPro;
 
 public class LootSelectionUI : MonoBehaviour
 {
+    public static LootSelectionUI Instance { get; private set; }
+    
     public NodeLootSpawner lootSpawner;
     public CanvasGroup panelCanvasGroup;
     public Transform spawnPoint;
@@ -29,6 +31,16 @@ public class LootSelectionUI : MonoBehaviour
     private RolledNode[] currentChoices;
     private bool isShowing = false;
     private Coroutine fadeCoroutine;
+
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Instance = this;
+    }
 
     private void Start()
     {
