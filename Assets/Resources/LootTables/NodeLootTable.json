@@ -46,11 +46,47 @@
             "fireRate": { "min": 1.0, "max": 1.0 },
             "nodePower": { "min": 1.0, "max": 1.0 },
             "powerFactor": { "min": 0.5, "max": 0.8 },
-            "pulseDirections": []
+            "pulseDirections": [{ "x": 1, "y": 0 }]
         },
         {
-            "name": "AutoGun Module",
-            "description": "Powers the ship's auto-turret",
+            "name": "Railgun Module (Up)",
+            "description": "Powers the ship's railgun with upward output",
+            "iconKey": "Railgun",
+            "effectType": "RailgunEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.2, "max": 1.5 },
+            "powerFactor": { "min": 0.6, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "Railgun Module (Down)",
+            "description": "Powers the ship's railgun with downward output",
+            "iconKey": "Railgun",
+            "effectType": "RailgunEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.2, "max": 1.5 },
+            "powerFactor": { "min": 0.6, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
+        },
+        {
+            "name": "Heavy Railgun",
+            "description": "Devastating railgun with massive damage",
+            "iconKey": "Railgun",
+            "effectType": "RailgunEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 2.5, "max": 3.0 },
+            "powerFactor": { "min": 0.7, "max": 0.9 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "AutoGun",
+            "description": "Fires 3 shots in rapid succession",
             "iconKey": "AutoFire",
             "effectType": "AutoGunEffect",
             "rarity": "Common",
@@ -58,7 +94,67 @@
             "fireRate": { "min": 1.0, "max": 1.0 },
             "nodePower": { "min": 1.0, "max": 1.0 },
             "powerFactor": { "min": 0.5, "max": 0.8 },
-            "pulseDirections": []
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "AutoGun (Up)",
+            "description": "Rapid fire with upward power output",
+            "iconKey": "AutoFire",
+            "effectType": "AutoGunEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.6, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "AutoGun (Down)",
+            "description": "Rapid fire with downward power output",
+            "iconKey": "AutoFire",
+            "effectType": "AutoGunEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.6, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
+        },
+        {
+            "name": "Ultragun",
+            "description": "Ultimate autogun with devastating firepower",
+            "iconKey": "AutoFire",
+            "effectType": "AutoGunEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 4.0, "max": 5.0 },
+            "powerFactor": { "min": 0.5, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "Ultragun (Up)",
+            "description": "Ultimate autogun with upward output",
+            "iconKey": "AutoFire",
+            "effectType": "AutoGunEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 4.0, "max": 5.0 },
+            "powerFactor": { "min": 0.6, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "Ultragun (Down)",
+            "description": "Ultimate autogun with downward output",
+            "iconKey": "AutoFire",
+            "effectType": "AutoGunEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 4.0, "max": 5.0 },
+            "powerFactor": { "min": 0.6, "max": 0.8 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
         },
         {
             "name": "Laser Module",
@@ -69,8 +165,68 @@
             "tags": ["weapon"],
             "fireRate": { "min": 1.0, "max": 1.0 },
             "nodePower": { "min": 1.0, "max": 1.0 },
-            "powerFactor": { "min": 0.6, "max": 1.0 },
-            "pulseDirections": []
+            "powerFactor": { "min": 0.4, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "Laser Module (Up)",
+            "description": "Laser beam with upward power routing",
+            "iconKey": "Blast",
+            "effectType": "LaserBeamEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.5, "max": 0.7 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "Laser Module (Down)",
+            "description": "Laser beam with downward power routing",
+            "iconKey": "Blast",
+            "effectType": "LaserBeamEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.5, "max": 0.7 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
+        },
+        {
+            "name": "Light of Heaven",
+            "description": "The ultimate in laser technology",
+            "iconKey": "Blast",
+            "effectType": "LaserBeamEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 3.0, "max": 4.0 },
+            "powerFactor": { "min": 0.8, "max": 1.0 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "Light of Heaven (Up)",
+            "description": "Ultimate laser with upward output",
+            "iconKey": "Blast",
+            "effectType": "LaserBeamEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 3.0, "max": 4.0 },
+            "powerFactor": { "min": 0.8, "max": 1.0 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "Light of Heaven (Down)",
+            "description": "Ultimate laser with downward output",
+            "iconKey": "Blast",
+            "effectType": "LaserBeamEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 3.0, "max": 4.0 },
+            "powerFactor": { "min": 0.8, "max": 1.0 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
         },
         {
             "name": "Power Splitter",
@@ -101,11 +257,11 @@
             "description": "Redirects power at an angle",
             "iconKey": "Repeater",
             "effectType": "",
-            "rarity": "Common",
+            "rarity": "Rare",
             "tags": ["utility"],
             "fireRate": { "min": 1.0, "max": 1.0 },
             "nodePower": { "min": 1.0, "max": 1.0 },
-            "powerFactor": { "min": 1.0, "max": 1.2 },
+            "powerFactor": { "min": 1.5, "max": 2.0 },
             "pulseDirections": [{ "x": 1, "y": 1 }]
         },
         {
@@ -118,23 +274,23 @@
             "fireRate": { "min": 1.0, "max": 1.0 },
             "nodePower": { "min": 1.0, "max": 1.0 },
             "powerFactor": { "min": 0.5, "max": 0.8 },
-            "pulseDirections": []
+            "pulseDirections": [{ "x": 1, "y": 0 }]
         },
         {
             "name": "Omni Generator",
-            "description": "Legendary generator that outputs in all forward directions",
+            "description": "Legendary generator that outputs incredible power in all forward directions",
             "iconKey": "Generator",
             "effectType": "GeneratorEffect",
             "rarity": "Legendary",
             "tags": ["utility"],
             "fireRate": { "min": 2.0, "max": 3.0 },
-            "nodePower": { "min": 1.5, "max": 2.0 },
+            "nodePower": { "min": 15, "max": 20 },
             "powerFactor": { "min": 0.5, "max": 0.7 },
             "pulseDirections": [{ "x": 1, "y": 1 }, { "x": 1, "y": 0 }, { "x": 1, "y": -1 }]
         },
         {
             "name": "Feedback Splitter",
-            "description": "Legendary splitter that sends power backwards",
+            "description": "This can send power backwards... use with care...",
             "iconKey": "Splitter",
             "effectType": "",
             "rarity": "Legendary",
@@ -143,6 +299,90 @@
             "nodePower": { "min": 1.0, "max": 1.0 },
             "powerFactor": { "min": 1.0, "max": 1.0 },
             "pulseDirections": [{ "x": -1, "y": 1 }, { "x": -1, "y": -1 }]
+        },
+        {
+            "name": "Missile Pod",
+            "description": "Fires a barrage of missiles when powered",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Common",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.0, "max": 1.5 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "Heavy Missile Bay",
+            "description": "Launches powerful missiles with high damage",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "Heavy Missile Bay (Up)",
+            "description": "Powerful missiles with upward power routing",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "Heavy Missile Bay (Down)",
+            "description": "Powerful missiles with downward power routing",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Rare",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 1.5, "max": 2.0 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
+        },
+        {
+            "name": "Swarm Launcher",
+            "description": "Legendary launcher that unleashes a devastating swarm",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 2.5, "max": 3.0 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": 0 }]
+        },
+        {
+            "name": "Swarm Launcher (Up)",
+            "description": "Devastating swarm with upward output",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 2.5, "max": 3.0 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": 1 }]
+        },
+        {
+            "name": "Swarm Launcher (Down)",
+            "description": "Devastating swarm with downward output",
+            "iconKey": "Missile",
+            "effectType": "MissileEffect",
+            "rarity": "Legendary",
+            "tags": ["weapon"],
+            "fireRate": { "min": 1.0, "max": 1.0 },
+            "nodePower": { "min": 2.5, "max": 3.0 },
+            "powerFactor": { "min": 0.6, "max": 0.6 },
+            "pulseDirections": [{ "x": 1, "y": -1 }]
         }
     ]
 }

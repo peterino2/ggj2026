@@ -43,6 +43,13 @@ public class Missile : MonoBehaviour
 
         transform.position += Velocity * Time.deltaTime;
 
+        Vector3 pos = transform.position;
+        if (pos.z != -5f)
+        {
+            pos.z = -5f;
+            transform.position = pos;
+        }
+
         if(transform.position.x > 2000.0f)
         {
             gameObject.SetActive(false);

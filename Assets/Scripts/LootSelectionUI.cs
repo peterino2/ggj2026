@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 using TMPro;
 
 public class LootSelectionUI : MonoBehaviour
@@ -23,12 +24,18 @@ public class LootSelectionUI : MonoBehaviour
     public Color rareColor;
     public Color legendColor;
 
+    public float fadeDuration = 0.3f;
+
     private RolledNode[] currentChoices;
     private bool isShowing = false;
+    private Coroutine fadeCoroutine;
 
     private void Start()
     {
-        HideSelection();
+        panelCanvasGroup.alpha = 0f;
+        panelCanvasGroup.interactable = false;
+        panelCanvasGroup.blocksRaycasts = false;
+        isShowing = false;
         
         for (int i = 0; i < choiceButtons.Length; i++)
         {
@@ -108,16 +115,55 @@ public class LootSelectionUI : MonoBehaviour
             choiceButtons[i].gameObject.SetActive(true);
         }
 
-        panelCanvasGroup.alpha = 1f;
-        panelCanvasGroup.interactable = true;
-        panelCanvasGroup.blocksRaycasts = true;
-        isShowing = true;
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeIn());
     }
 
     public void HideSelection()
     {
-        panelCanvasGroup.alpha = 0f;
+        if (fadeCoroutine != null)
+            StopCoroutine(fadeCoroutine);
+        fadeCoroutine = StartCoroutine(FadeOut());
+    }
+
+    private IEnumerator FadeIn()
+    {
         panelCanvasGroup.interactable = false;
+        panelCanvasGroup.blocksRaycasts = true;
+        
+        float elapsed = 0f;
+        float startAlpha = panelCanvasGroup.alpha;
+        
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            panelCanvasGroup.alpha = Mathf.Lerp(startAlpha, 1f, elapsed / fadeDuration);
+            yield return null;
+        }
+        
+        panelCanvasGroup.alpha = 1f;
+        panelCanvasGroup.interactable = true;
+        isShowing = true;
+        Time.timeScale = 0f;
+    }
+
+    private IEnumerator FadeOut()
+    {
+        panelCanvasGroup.interactable = false;
+        Time.timeScale = 1f;
+        
+        float elapsed = 0f;
+        float startAlpha = panelCanvasGroup.alpha;
+        
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            panelCanvasGroup.alpha = Mathf.Lerp(startAlpha, 0f, elapsed / fadeDuration);
+            yield return null;
+        }
+        
+        panelCanvasGroup.alpha = 0f;
         panelCanvasGroup.blocksRaycasts = false;
         isShowing = false;
         currentChoices = null;

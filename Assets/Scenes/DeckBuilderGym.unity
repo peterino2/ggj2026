@@ -512,11 +512,12 @@ MonoBehaviour:
   - {fileID: 562007791}
   - {fileID: 1305405513}
   commonMaterial: {fileID: 2100000, guid: 48f65275962cbf341a7be65ceb3b078f, type: 2}
-  rareMaterial: {fileID: 2100000, guid: 943f989f91b389e428531d5d969d53eb, type: 2}
+  rareMaterial: {fileID: 2100000, guid: f228b0a023c67ca4e887874cd40b88bf, type: 2}
   legendaryMaterial: {fileID: 2100000, guid: f228b0a023c67ca4e887874cd40b88bf, type: 2}
   commonColor: {r: 0.63522005, g: 0.63522005, b: 0.63522005, a: 1}
   rareColor: {r: 0, g: 0.3222401, b: 1, a: 1}
   legendColor: {r: 1, g: 0.6390569, b: 0, a: 1}
+  fadeDuration: 0.3
 --- !u!20 &403922431 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 8361709600534186891, guid: 60bf75cfb03fd6d47a34e945dd8343ac, type: 3}
@@ -2378,7 +2379,7 @@ MonoBehaviour:
   - key: Generator
     sprite: {fileID: 21300000, guid: 1ff3f805fcba44e1a992a7d6f49c27fe, type: 3}
   - key: Blast
-    sprite: {fileID: 21300000, guid: 09bc5e2ceefcb4293a02a7ab7e6a5587, type: 3}
+    sprite: {fileID: 21300000, guid: 2af41bbf5647964439ad26827c748566, type: 3}
   - key: Railgun
     sprite: {fileID: 21300000, guid: f69297beab49d16458d45d62e9e01001, type: 3}
   - key: AutoFire
@@ -2387,6 +2388,10 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: cb613f46c67f60a43957c60efd4a9cb2, type: 3}
   - key: Repair
     sprite: {fileID: 21300000, guid: 554213d2b5217764e92726404f00b8a1, type: 3}
+  - key: Repeater
+    sprite: {fileID: 21300000, guid: 568b82645fc204c4aaad75b83eae7830, type: 3}
+  - key: Missile
+    sprite: {fileID: 21300000, guid: 09bc5e2ceefcb4293a02a7ab7e6a5587, type: 3}
   spawnCamera: {fileID: 0}
   floatersCanvas: {fileID: 1556748859}
 --- !u!222 &7465816171583481277

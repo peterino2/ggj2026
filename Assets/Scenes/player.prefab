@@ -218,6 +218,7 @@ GameObject:
   - component: {fileID: 2205775205605134369}
   - component: {fileID: 2755320782236196003}
   - component: {fileID: 7299766957351831032}
+  - component: {fileID: 5268706918162571045}
   m_Layer: 5
   m_Name: player
   m_TagString: Player
@@ -234,7 +235,7 @@ RectTransform:
   m_GameObject: {fileID: 4680778551671988746}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 150586809509233116}
@@ -273,7 +274,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 41ff5e201f4697a4cadd37391f6e38d6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 78fa3d22b75cda949ad9c5ae53930cef, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -419,3 +420,19 @@ MonoBehaviour:
   ShotCooldown: 2
   DamagePerPulsePower: 100
   BaseMinPulsePowerPerShot: 5
+--- !u!114 &5268706918162571045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4680778551671988746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b06e59359cd898546bd43113edce6b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MissileLauncher
+  MissilePrefab: {fileID: 4548796102123448178, guid: f2f7c53332dcb3948a8ace5de44bdf8c, type: 3}
+  TimeBetweenShots: 3
+  PulsePowerPerMissile: 3
+  InitialVelocity: 500

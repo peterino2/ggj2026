@@ -43,7 +43,7 @@ public class MissileLauncher : WeaponBase
     void Update()
     {
         // DEBUG TEST REMOVE
-        CurPulsePower += 100.0f * Time.deltaTime;
+        // CurPulsePower += 100.0f * Time.deltaTime;
 
         TimeSinceLastShot += Time.deltaTime;
 

@@ -120,6 +120,7 @@ public class NodeLootSpawner : MonoBehaviour
         effectTypeMap["AutoGunEffect"] = typeof(AutoGunEffect);
         effectTypeMap["LaserBeamEffect"] = typeof(LaserBeamEffect);
         effectTypeMap["RepairEffect"] = typeof(RepairEffect);
+        effectTypeMap["MissileEffect"] = typeof(MissileEffect);
     }
 
     private void InitializeIconLookup()

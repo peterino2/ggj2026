@@ -31,6 +31,13 @@ public class AutoGunBullet : MonoBehaviour
 
         gameObject.transform.position += Velocity * Time.deltaTime;
 
+        Vector3 pos = transform.position;
+        if (pos.z != -5f)
+        {
+            pos.z = -5f;
+            transform.position = pos;
+        }
+
         if(gameObject.transform.position.x > 2000.0f)
         {
             Owner.Release(this);

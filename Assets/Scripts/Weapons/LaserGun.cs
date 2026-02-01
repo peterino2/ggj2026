@@ -39,6 +39,7 @@ public class LaserGun : WeaponBase
 
         if(Firing)
         {
+            PulsePowerPerSecond = 1.0f + CurPulsePower * 0.05f;
             CurPulsePower -= PulsePowerPerSecond * Time.deltaTime;
 
             if(CurPulsePower <= 0.0f)
