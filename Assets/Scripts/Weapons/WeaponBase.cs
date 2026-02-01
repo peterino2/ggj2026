@@ -1,9 +1,6 @@
 using UnityEngine;
 
-public class WeaponBase : MonoBehaviour
+public class WeaponBase : EquipmentBase
 {
-    public virtual void ApplyPulse(float pulsePower)
-    {
 
-    }
 }
