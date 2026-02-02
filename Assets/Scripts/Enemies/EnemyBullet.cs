@@ -5,7 +5,7 @@ public class EnemyBullet : MonoBehaviour
 {
     public Vector3 Velocity;
 
-    public float Damage = 20.0f;
+    public float Damage = 10.0f;
 
     public ObjectPool<EnemyBullet> Owner;
 

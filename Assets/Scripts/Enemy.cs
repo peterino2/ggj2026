@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float arcAmp = 0.1f;
     [SerializeField] EARushPlayer rushPlayerScript;
     private float velocityIncreaseMultiplier = 0.10f;
-    private float hpIncrease = 30;
+    private float hpIncreaseMultiplier = 0.20f;
     [SerializeField] private movementType movementOption = movementType.Straight;
     private float internalTimer = 0f;
     private Rigidbody2D.SlideMovement SlideMovement = new Rigidbody2D.SlideMovement();
@@ -28,13 +28,14 @@ public class Enemy : MonoBehaviour
         CircularCCW,
         UpwardArc,
         DownwardArc,
-        Rush
+        Rush,
+        Boss
     }
     void Start()
     {
         body = gameObject.GetComponent<Rigidbody2D>();
-        curHP +=  Gamemode.Instance.GetDifficulty() * hpIncrease;
-        velocity += velocity *  Gamemode.Instance.GetDifficulty() * Mathf.Clamp(velocityIncreaseMultiplier, 0.1f, 2.5f);
+        curHP +=  curHP * Gamemode.Instance.GetDifficulty() * hpIncreaseMultiplier;
+        velocity += velocity * Mathf.Clamp(Gamemode.Instance.GetDifficulty() * velocityIncreaseMultiplier, 0.1f, 2.5f);
     }
 
     void Update() 
@@ -72,6 +73,7 @@ public class Enemy : MonoBehaviour
         
         if (isOutOfBounds())
         {
+            Debug.Log("Ship Out of Bounds");
             Destroy(gameObject);
         }
     }
@@ -141,6 +143,7 @@ public class Enemy : MonoBehaviour
         }
         else if (other.CompareTag("Player"))
         {
+            Debug.Log("Collided with player");
             SpriteController.gPlayer.takeDamage(25);
             Destroy(gameObject);
         }

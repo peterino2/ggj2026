@@ -34,6 +34,7 @@ public class WaveManager : MonoBehaviour
     public List<WaveSpawn> pendingWaveSpawns = new List<WaveSpawn>();
     public GameObject maxSpawnLimit;
     public GameObject minSpawnLimit;
+    public GameObject bossEndPosition;
 
     private SpawnRange spawnRange;
     private float time;
@@ -44,6 +45,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] Wave spawnCirc2Prefab;
     [SerializeField] Wave spawnWave3Prefab;
     [SerializeField] Wave spawnSpreadWavePrefab;
+    [SerializeField] Wave spawnBossWavePrefab;
 
     private void Start()
     {
@@ -59,16 +61,24 @@ public class WaveManager : MonoBehaviour
         ws.delay = 2;
         pendingWaveSpawns.Add(ws);
         AddWaves(3, diff);
-        
+
+        WaveSpawn ws5 = new WaveSpawn();
+        ws5.wave = spawnBossWavePrefab;
+        spawnBossWavePrefab.enemy.GetComponent<EAMoveToXPosition>().bossPosition = bossEndPosition.transform;
+        ws5.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
+        pendingWaveSpawns.Add(ws5);
+
     }
     private void AddWaves(int waves, float diff) {
+
         for (int i = 0; i < waves; i++)
         {
             WaveSpawn ws = new WaveSpawn();
             ws.wave = spawnStraightPrefab;
             ws.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws);
-            Debug.Log("diff is " + diff);
+
+
             WaveSpawn ws2 = new WaveSpawn();
             ws2.wave = spawnCirc2Prefab;
             ws2.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
@@ -84,6 +94,11 @@ public class WaveManager : MonoBehaviour
             ws4.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
             pendingWaveSpawns.Add(ws4);
         }
+        WaveSpawn ws5 = new WaveSpawn();
+        ws5.wave = spawnBossWavePrefab;
+        spawnBossWavePrefab.enemy.GetComponent<EAMoveToXPosition>().bossPosition = bossEndPosition.transform;
+        ws5.delay = Mathf.Clamp(12 - diff, 4.0f, 11.0f);
+        pendingWaveSpawns.Add(ws5);
     }
 
     private void Update()
@@ -108,7 +123,7 @@ public class WaveManager : MonoBehaviour
         }
         else if (pendingWaveSpawns.Count == 0)
         {
-            AddWaves(3, Gamemode.Instance.GetDifficulty());
+            AddWaves(2, Gamemode.Instance.GetDifficulty());
         }
     }
 }
