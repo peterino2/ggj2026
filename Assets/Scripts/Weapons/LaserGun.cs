@@ -62,7 +62,7 @@ public class LaserGun : WeaponBase
         if(Firing)
         {
             Beam.SetCurrentPower(CurPulsePower);
-            Beam.PowerDamageScale = DPSPulseMultiplier;
+            Beam.PowerDamageScale = DPSPulseMultiplier * 0.1f;
         }
     }
 }
