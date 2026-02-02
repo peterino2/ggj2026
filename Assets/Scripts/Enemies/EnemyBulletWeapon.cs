@@ -17,7 +17,7 @@ public class EnemyBulletWeapon : EnemyWeaponBase
     private EnemyBullet CreateBullet()
     {
         EnemyBullet Bullet = Instantiate(BulletPrefab);
-        Bullet.transform.SetParent(transform.parent);
+
         Bullet.Owner = BulletPool;
         return Bullet;
     }
